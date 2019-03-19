@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  
+  
+  <title>간만에 ps</title>
+  <meta name="description" content="오늘은 시간이 없어서 뭔가 기록할 만큼 공부한건 없고, 타임라인에 문제가 보이길래 오랜만에 또 ps 문제를 풀어봤다.">
+  
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="https://a.cyclic.dev/day01/">
+  
+  
+  <link rel="alternate" type="application/rss+xml" title="Splinters of Life" href="https://a.cyclic.dev/feed.xml">
+
+  
+
+  
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="kcy1019">
+  <meta name="twitter:title" content="간만에 ps">
+  <meta name="twitter:description" content="오늘은 시간이 없어서 뭔가 기록할 만큼 공부한건 없고, 타임라인에 문제가 보이길래 오랜만에 또 ps 문제를 풀어봤다.">
+  
+    <meta name="twitter:creator" content="kcy1019">
+  
+  
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css?family=Bitter:400,400i,700" rel="stylesheet">
+
+  
+
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">Splinters of Life</a>
+
+    <nav class="site-nav">
+      
+        
+        <a class="page-link" href="/archives/">Archives</a>
+      
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    
+      <h1 class="post-title" itemprop="name headline">간만에 ps</h1>
+    
+    <p class="post-meta"><time datetime="2019-03-19T14:21:00+00:00" itemprop="datePublished">Mar 19, 2019</time> •
+  
+    
+    
+      
+    
+      
+        <a href="/categories/ps/">ps</a>
+      
+    
+  
+
+
+
+</p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <p>오늘은 시간이 없어서 뭔가 기록할 만큼 공부한건 없고,
+타임라인에 문제가 보이길래 오랜만에 또 ps 문제를 풀어봤다.</p>
+
+<p><a href="https://boj.kr/2419">문제를 읽고</a> 떠오르는 몇 가지 중요한 관찰을 적어보자.</p>
+<ul>
+  <li>주어진 바구니의 위치를 정렬했을 때,
+방문한 지점은 $[l, r]$ 처럼 연속된 형태여야 한다.
+(이동중에 지나게 되는 사탕을 먹지 않으면 손해니까)</li>
+  <li>모든 바구니의 사탕 수가 동일하므로, 문제를 바꿔 생각할 수 있다:
+$t_i$를 $i$번째 사탕 바구니에 방문했을 때의 시간이라고 하면,
+$\mathrm{maximize} m \cdot n - (t_1 + t_2 + … + t_n)$
+$\Leftrightarrow \mathrm{minimize} \sum_{i=1}^n t_i$
+을 풀면 된다.</li>
+</ul>
+
+<p>이걸로 충분하면 좋겠으나, 아직 해결해야 할 의문이 남아있다.</p>
+<ol>
+  <li>과연 모든 사탕을 먹는게 최적일까?
+당연히 아니다. 어떤 $k &lt; n$인 $k$에 대해, $t_k \geq m$이 되면 더 이상의 바구니를 방문할 이유가 없으니까.</li>
+  <li>$k$개의 바구니만 방문하는 경우에 방문하게 되는 바구니의 구간은 $k-1$개의 바구니만 방문하는 경우의 구간을 포함할까?
+이게 되면 바이너리 서치를 통해 최적의 $k$를 찾을 수 있을 텐데, 아쉽게도 성립하지 않는 케이스를 찾을 수 있다:
+ 바구니가 [-99, -98, -97, -1, 0, 1, 50, 100] 과 같이 놓여있는 경우,
+4개의 바구니를 방문하는 경우와 5개의 바구니를 방문하는 경우에 방문하게 되는 바구니의 구간이 전혀 다름을 확인할 수 있다.</li>
+</ol>
+
+<p>지금까지 생각해본 내용을 바탕으로 해법을 구상하면 이렇게 정리할 수 있다.</p>
+<ul>
+  <li>상태를 $(\mathrm{left}, \mathrm{right}, \mathrm{is_right}, \mathrm{remaining})$ 으로 정의하고, 다이나믹 프로그래밍으로 최소 시간을 구하자!
+$\mathrm{left}, \mathrm{right}$: 이미 방문한 구간의 끝 점, $\mathrm{is_right}$: 현재 위치가 오른쪽 끝 점인지의 여부, $\mathrm{remaining}$: 앞으로 몇 개의 바구니를 더 선택할 예정인지.
+    <ul>
+      <li>$\mathrm{O}(n^3)$의 시간과 공간으로 문제를 해결할 수 있다.</li>
+      <li>각 $remaining$에 대해 배열을 재활용하면 공간복잡도는 $\mathrm{O}(n^2)$으로 줄일 수 있다.</li>
+    </ul>
+  </li>
+</ul>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="cp">#include&lt;cstdio&gt;
+#include&lt;cstring&gt;
+#include&lt;algorithm&gt;
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="k">using</span> <span class="n">ll</span> <span class="o">=</span> <span class="kt">long</span> <span class="kt">long</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">c</span><span class="p">[</span><span class="mi">311</span><span class="p">];</span>
+<span class="n">ll</span> <span class="n">d</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">311</span><span class="p">][</span><span class="mi">311</span><span class="p">];</span>
+
+<span class="n">ll</span> <span class="nf">candy</span><span class="p">(</span><span class="kt">int</span> <span class="n">l</span><span class="p">,</span> <span class="kt">int</span> <span class="n">r</span><span class="p">,</span> <span class="kt">int</span> <span class="n">right</span><span class="p">,</span> <span class="kt">int</span> <span class="n">k</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">k</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">ll</span> <span class="o">&amp;</span> <span class="n">ret</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="n">right</span><span class="p">][</span><span class="n">l</span><span class="p">][</span><span class="n">r</span><span class="p">];</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">ret</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="n">ret</span><span class="p">;</span>
+    <span class="n">ret</span> <span class="o">=</span> <span class="n">m</span> <span class="o">*</span><span class="mi">1LL</span><span class="o">*</span> <span class="n">k</span><span class="p">;</span>
+
+    <span class="kt">int</span> <span class="n">pos</span> <span class="o">=</span> <span class="n">right</span> <span class="o">?</span> <span class="n">c</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="o">:</span> <span class="n">c</span><span class="p">[</span><span class="n">l</span><span class="p">];</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">l</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">dist</span> <span class="o">=</span> <span class="n">abs</span><span class="p">(</span><span class="n">pos</span> <span class="o">-</span> <span class="n">c</span><span class="p">[</span><span class="n">l</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]);</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">ret</span><span class="p">,</span> <span class="n">candy</span><span class="p">(</span><span class="n">l</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">dist</span> <span class="o">*</span><span class="mi">1LL</span><span class="o">*</span> <span class="n">k</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">r</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">dist</span> <span class="o">=</span> <span class="n">abs</span><span class="p">(</span><span class="n">pos</span> <span class="o">-</span> <span class="n">c</span><span class="p">[</span><span class="n">r</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]);</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">ret</span><span class="p">,</span> <span class="n">candy</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">r</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">dist</span> <span class="o">*</span><span class="mi">1LL</span><span class="o">*</span> <span class="n">k</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">ret</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">scanf</span><span class="p">(</span><span class="s">"%d%d"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">n</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">m</span><span class="p">);</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="n">scanf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span> <span class="n">c</span> <span class="o">+</span> <span class="n">i</span><span class="p">);</span>
+
+    <span class="kt">int</span> <span class="n">has_zero</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">find</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">c</span> <span class="o">+</span> <span class="n">n</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="n">c</span> <span class="o">&gt;=</span> <span class="n">n</span><span class="p">)</span> <span class="n">c</span><span class="p">[</span><span class="n">n</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="n">has_zero</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="n">sort</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">c</span> <span class="o">+</span> <span class="n">n</span><span class="p">);</span>
+    <span class="kt">int</span> <span class="n">start</span> <span class="o">=</span> <span class="n">lower_bound</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">c</span> <span class="o">+</span> <span class="n">n</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="n">c</span><span class="p">;</span>
+
+    <span class="n">ll</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="n">n</span><span class="p">;</span> <span class="n">k</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">memset</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="k">sizeof</span> <span class="n">d</span><span class="p">);</span>
+        <span class="n">ans</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="n">m</span> <span class="o">*</span><span class="mi">1LL</span><span class="o">*</span> <span class="n">k</span> <span class="o">-</span> <span class="n">candy</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">));</span>
+    <span class="p">}</span>
+
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%lld"</span><span class="p">,</span> <span class="n">ans</span> <span class="o">-</span> <span class="n">m</span> <span class="o">*</span> <span class="o">!</span><span class="n">has_zero</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span></code></pre></figure>
+
+
+  </div>
+
+  
+
+</article>
+
+      </div>
+    </main>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <p>
+      
+
+&copy;  - Powered by <a href="https://jekyllrb.com">Jekyll</a> &amp; <a href="https://github.com/yous/whiteglass">whiteglass</a> - Subscribe via <a href="https://a.cyclic.dev/feed.xml">RSS</a>
+
+    </p>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>

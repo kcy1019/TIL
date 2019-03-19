@@ -5,6 +5,10 @@
 <lastmod>2019-03-18T12:14:00+00:00</lastmod>
 </url>
 <url>
+<loc>https://a.cyclic.dev/day01/</loc>
+<lastmod>2019-03-19T14:21:00+00:00</lastmod>
+</url>
+<url>
 <loc>https://a.cyclic.dev/404/</loc>
 </url>
 <url>
@@ -15,5 +19,8 @@
 </url>
 <url>
 <loc>https://a.cyclic.dev/categories/meta/</loc>
+</url>
+<url>
+<loc>https://a.cyclic.dev/categories/ps/</loc>
 </url>
 </urlset>
