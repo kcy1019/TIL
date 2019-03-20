@@ -112,8 +112,8 @@
 (이동중에 지나게 되는 사탕을 먹지 않으면 손해니까)</li>
   <li>모든 바구니의 사탕 수가 동일하므로, 문제를 바꿔 생각할 수 있다:
 $t_i$를 $i$번째 사탕 바구니에 방문했을 때의 시간이라고 하면,
-$\mathrm{maximize} m \cdot n - (t_1 + t_2 + … + t_n)$
-$\Leftrightarrow \mathrm{minimize} \sum_{i=1}^n t_i$
+$\mathrm{ maximize } m \cdot n - (t_1 + t_2 + … + t_n)$
+$\Leftrightarrow \mathrm{ minimize } \sum_{i=1}^n t_i$
 을 풀면 된다.</li>
 </ul>
 
@@ -129,11 +129,11 @@ $\Leftrightarrow \mathrm{minimize} \sum_{i=1}^n t_i$
 
 <p>지금까지 생각해본 내용을 바탕으로 해법을 구상하면 이렇게 정리할 수 있다.</p>
 <ul>
-  <li>상태를 $(\mathrm{left}, \mathrm{right}, \mathrm{is_right}, \mathrm{remaining})$ 으로 정의하고, 다이나믹 프로그래밍으로 최소 시간을 구하자!
-$\mathrm{left}, \mathrm{right}$: 이미 방문한 구간의 끝 점, $\mathrm{is_right}$: 현재 위치가 오른쪽 끝 점인지의 여부, $\mathrm{remaining}$: 앞으로 몇 개의 바구니를 더 선택할 예정인지.
+  <li>상태를 $(\mathrm{ left }, \mathrm{ right }, \mathrm{ is_right }, \mathrm{ remaining })$ 으로 정의하고, 다이나믹 프로그래밍으로 최소 시간을 구하자!
+$\mathrm{ left }, \mathrm{ right }$: 이미 방문한 구간의 끝 점, $\mathrm{ is_right }$: 현재 위치가 오른쪽 끝 점인지의 여부, $\mathrm{ remaining }$: 앞으로 몇 개의 바구니를 더 선택할 예정인지.
     <ul>
-      <li>$\mathrm{O}(n^3)$의 시간과 공간으로 문제를 해결할 수 있다.</li>
-      <li>각 $\mathrm{remaining}$에 대해 배열을 재활용하면 공간복잡도는 $\mathrm{O}(n^2)$으로 줄일 수 있다.</li>
+      <li>$\mathrm{ O }(n^3)$의 시간과 공간으로 문제를 해결할 수 있다.</li>
+      <li>각 $\mathrm{ remaining }$에 대해 배열을 재활용하면 공간복잡도는 $\mathrm{ O }(n^2)$으로 줄일 수 있다.</li>
     </ul>
   </li>
 </ul>
