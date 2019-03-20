@@ -5,7 +5,7 @@
   
   <link href="https://a.cyclic.dev/feed.xml" rel="self" type="application/atom+xml" />
   <link href="https://a.cyclic.dev/" rel="alternate" type="text/html" />
-  <updated>2019-03-20T14:51:40+00:00</updated>
+  <updated>2019-03-20T15:17:13+00:00</updated>
   <id>https://a.cyclic.dev//</id>
 
   
@@ -18,6 +18,69 @@
 
   
 
+  
+  
+    <entry>
+      
+      <title type="html">Wilson’s Theorem</title>
+      
+      
+      <link href="https://a.cyclic.dev/day02/" rel="alternate" type="text/html" title="Wilson's Theorem" />
+      
+      <published>2019-03-20T14:09:00+00:00</published>
+      <updated>2019-03-20T14:09:00+00:00</updated>
+      <id>https://a.cyclic.dev/day02</id>
+      <content type="html" xml:base="https://a.cyclic.dev/day02/">&lt;p&gt;오늘 트위터에서 쌍둥이 소수 $p, p + 2$가 있을 때, $p! \mathrm{mod} p + 2$를 구해보자!
+라는 타래를 보고 예에전 학부때 배운 정수론이 떠올라서 기록해보았다.&lt;/p&gt;
+
+&lt;h4 id=&quot;윌슨-정리&quot;&gt;윌슨 정리&lt;/h4&gt;
+
+&lt;p&gt;$(p - 1)! \equiv -1 \mathrm{mod} p \text{ if and only if } p \text{ is a prime.}$&lt;/p&gt;
+
+&lt;p&gt;이 정리를 이용해서 처음의 문제를 풀면 굉장히 간단하게 풀린다:
+이를 이용하면 $(p+1)! \cdot (p+1)^{-1} \equiv -1 \mathrm{mod} p+2 $ 임을 알 수 있고,
+이는 다시 $(p+1)! \cdot (p+1)^{-1} \equiv -1 \cdot -1 \equiv 1 \mathrm{mod} p+2$로 깔끔하게 정리된다.&lt;/p&gt;
+
+&lt;h4 id=&quot;윌슨-정리의-증명&quot;&gt;윌슨 정리의 증명&lt;/h4&gt;
+
+&lt;p&gt;&lt;strong&gt;1. $p \text{ is a prime } \Rightarrow (p - 1)! \equiv -1 \mathrm{mod} p$&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;(2일 때에는 성립하니까, 2 이상의 p에 대해서만 생각해보자)
+$x \in {1, 2, …, p-1}$은 모두 $p$와 서로소 관계이므로
+각 $x$에 대해 $x\cdot{x^&lt;em&gt;}\equiv 1\mathrm{mod} p$인 $x^&lt;/em&gt; \in {1, 2, …, p-1}$가 존재한다.
+여기서, $xx^* \equiv 1 \mathrm{mod} p$이 되는 것 중 $x \equiv x^* \mathrm{mod} p$인 경우도 존재하는데,
+이런 때에는 $x \equiv \pm 1 \mathrm{mod} p$ 임을 알 수 있다(즉 $x = 1$과 $x = p-1$인 경우).
+따라서 $(p-1)! \equiv (p-1) \cdot 1 \cdot (p-2) \cdot …  \cdot 2 \equiv \cdot 1 \cdot 1 \equiv \mathrm{mod} p$
+임을 확인할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;2. $(p - 1)! \equiv -1 \mathrm{mod} p \Rightarrowp \text{ is a prime } $&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;$p$가 소수가 아니라고(즉 $q | p$인 소수 $q$ 존재한다고) 가정하자.
+이 경우 $q &amp;lt; p$이므로 $q | (p - 1)!$라는 결과가 나오는데,
+이는 모순이고, 따라서 $p$가 소수임을 확인할 수 있다.&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      
+
+      
+        <category term="math" />
+      
+
+      
+
+      
+        <summary type="html">오늘 트위터에서 쌍둥이 소수 $p, p + 2$가 있을 때, $p! \mathrm{mod} p + 2$를 구해보자! 라는 타래를 보고 예에전 학부때 배운 정수론이 떠올라서 기록해보았다.</summary>
+      
+
+      
+      
+    </entry>
+  
   
   
     <entry>
@@ -61,7 +124,7 @@ $\Leftrightarrow \mathrm{minimize} \sum_{i=1}^n t_i$
 $\mathrm{left}, \mathrm{right}$: 이미 방문한 구간의 끝 점, $\mathrm{is_right}$: 현재 위치가 오른쪽 끝 점인지의 여부, $\mathrm{remaining}$: 앞으로 몇 개의 바구니를 더 선택할 예정인지.
     &lt;ul&gt;
       &lt;li&gt;$\mathrm{O}(n^3)$의 시간과 공간으로 문제를 해결할 수 있다.&lt;/li&gt;
-      &lt;li&gt;각 $remaining$에 대해 배열을 재활용하면 공간복잡도는 $\mathrm{O}(n^2)$으로 줄일 수 있다.&lt;/li&gt;
+      &lt;li&gt;각 $\mathrm{remaining}$에 대해 배열을 재활용하면 공간복잡도는 $\mathrm{O}(n^2)$으로 줄일 수 있다.&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
