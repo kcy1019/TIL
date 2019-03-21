@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  
+  
+  <title>odd-even-linked list</title>
+  <meta name="description" content="문제 링크. O(n) 시간과 O(1) 공간으로 해결해보자.">
+  
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="https://a.cyclic.dev/day03/">
+  
+  
+  <link rel="alternate" type="application/rss+xml" title="Splinters of Life" href="https://a.cyclic.dev/feed.xml">
+
+  
+
+  
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="kcy1019">
+  <meta name="twitter:title" content="odd-even-linked list">
+  <meta name="twitter:description" content="문제 링크. O(n) 시간과 O(1) 공간으로 해결해보자.">
+  
+    <meta name="twitter:creator" content="kcy1019">
+  
+  
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css?family=Bitter:400,400i,700" rel="stylesheet">
+
+  
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      TeX: {
+        equationNumbers: {
+          autoNumber: "AMS"
+        }
+      },
+      tex2jax: {
+        inlineMath: [ ['$','$'] ],
+        displayMath: [ ['$$','$$'] ],
+        processEscapes: true,
+      }
+    });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">Splinters of Life</a>
+
+    <nav class="site-nav">
+      
+        
+        <a class="page-link" href="/archives/">Archives</a>
+      
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    
+      <h1 class="post-title" itemprop="name headline">odd-even-linked list</h1>
+    
+    <p class="post-meta"><time datetime="2019-03-21T14:59:59+00:00" itemprop="datePublished">Mar 21, 2019</time> •
+  
+    
+    
+      
+    
+      
+        <a href="/categories/ps/">ps</a>
+      
+    
+      
+    
+  
+
+
+
+</p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <p><a href="https://leetcode.com/problems/odd-even-linked-list/">문제 링크</a>. O(n) 시간과 O(1) 공간으로 해결해보자.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Input:  1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;null
+Output: 1-&gt;3-&gt;5-&gt;2-&gt;4-&gt;null
+</code></pre></div></div>
+
+<p>홀수 리스트와 짝수 리스트를 분리한 다음 둘을 연결하는 것으로 쉽게 해결할 수 있다:
+홀수 리스트와 짝수 리스트는 포인터를 두 칸씩 전진하면 구할 수 있다.
+이렇게 분리한 두 리스트를, 미리 저장해두었던 짝수 리스트의 첫 원소 포인터를 이용해 붙여주면 끝!</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="cm">/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ * };
+ */</span>
+<span class="k">struct</span> <span class="n">Solution</span> <span class="p">{</span>
+    <span class="n">ListNode</span><span class="o">*</span> <span class="n">oddEvenList</span><span class="p">(</span><span class="n">ListNode</span> <span class="o">*</span> <span class="n">head</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">head</span> <span class="o">==</span> <span class="nb">nullptr</span><span class="p">)</span> <span class="k">return</span> <span class="nb">nullptr</span><span class="p">;</span> <span class="c1">// 빈 리스트가 들어올 수 있다.</span>
+        <span class="k">auto</span> <span class="o">*</span> <span class="n">odd</span>  <span class="o">=</span> <span class="n">head</span><span class="p">;</span>
+        <span class="k">auto</span> <span class="o">*</span> <span class="n">even</span> <span class="o">=</span> <span class="n">head</span> <span class="o">-&gt;</span> <span class="n">next</span><span class="p">;</span>
+        <span class="k">auto</span> <span class="o">*</span> <span class="n">conn</span> <span class="o">=</span> <span class="n">even</span><span class="p">;</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">odd</span> <span class="o">-&gt;</span> <span class="n">next</span> <span class="o">!=</span> <span class="nb">nullptr</span> <span class="o">&amp;&amp;</span> <span class="n">even</span> <span class="o">-&gt;</span> <span class="n">next</span> <span class="o">!=</span> <span class="nb">nullptr</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">auto</span> <span class="o">*</span> <span class="n">odd_next</span>  <span class="o">=</span> <span class="n">odd</span>  <span class="o">-&gt;</span> <span class="n">next</span> <span class="o">-&gt;</span> <span class="n">next</span><span class="p">;</span>
+            <span class="k">auto</span> <span class="o">*</span> <span class="n">even_next</span> <span class="o">=</span> <span class="n">even</span> <span class="o">-&gt;</span> <span class="n">next</span> <span class="o">-&gt;</span> <span class="n">next</span><span class="p">;</span>
+            <span class="n">odd</span>  <span class="o">-&gt;</span> <span class="n">next</span> <span class="o">=</span> <span class="n">odd_next</span><span class="p">;</span>
+            <span class="n">even</span> <span class="o">-&gt;</span> <span class="n">next</span> <span class="o">=</span> <span class="n">even_next</span><span class="p">;</span>
+            <span class="n">odd</span>  <span class="o">=</span> <span class="n">odd</span>  <span class="o">-&gt;</span> <span class="n">next</span><span class="p">;</span>
+            <span class="n">even</span> <span class="o">=</span> <span class="n">even</span> <span class="o">-&gt;</span> <span class="n">next</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">odd</span> <span class="o">-&gt;</span> <span class="n">next</span> <span class="o">=</span> <span class="n">conn</span><span class="p">;</span>
+        <span class="k">return</span> <span class="n">head</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span></code></pre></figure>
+
+
+  </div>
+
+  
+
+</article>
+
+      </div>
+    </main>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <p>
+      
+
+&copy;  - Powered by <a href="https://jekyllrb.com">Jekyll</a> &amp; <a href="https://github.com/yous/whiteglass">whiteglass</a> - Subscribe via <a href="https://a.cyclic.dev/feed.xml">RSS</a>
+
+    </p>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>
