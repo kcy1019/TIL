@@ -5,7 +5,7 @@
   
   <link href="https://a.cyclic.dev/feed.xml" rel="self" type="application/atom+xml" />
   <link href="https://a.cyclic.dev/" rel="alternate" type="text/html" />
-  <updated>2019-03-22T14:11:12+00:00</updated>
+  <updated>2019-03-22T14:14:19+00:00</updated>
   <id>https://a.cyclic.dev//</id>
 
   
@@ -37,7 +37,7 @@
 
 &lt;h2 id=&quot;스크립트-만들기&quot;&gt;스크립트 만들기&lt;/h2&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/gscript0.png&quot; alt=&quot;script-editor&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/gscript0.png&quot; style=&quot;max-width:350px&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;응답이 기록되는 스프레드 시트에서 스크립트 에디터를 열자.
 &lt;a href=&quot;https://developers.google.com/apps-script/&quot;&gt;Google Apps Script&lt;/a&gt;는 기본적으로 ECMAScript에 G Suite에 접근하는 기능이 추가된 것&lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;으로,
@@ -69,13 +69,13 @@
 
 &lt;p&gt;이렇게 작성한 코드를 스프레드 시트에서 실행하는 방법을 알아보자.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/gscript1.png&quot; alt=&quot;fetch-scripts&quot; /&gt;
+&lt;p&gt;&lt;img src=&quot;/images/gscript1.png&quot; style=&quot;max-width:350px&quot; /&gt;
 우선 이렇게 방금 작성한 함수를 가져오고&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/gscript2.png&quot; alt=&quot;register-scripts&quot; /&gt;
+&lt;p&gt;&lt;img src=&quot;/images/gscript2.png&quot; style=&quot;max-width:350px&quot; /&gt;
 함수들을 등록한 다음&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/gscript3.png&quot; alt=&quot;run-constructor&quot; /&gt;
+&lt;p&gt;&lt;img src=&quot;/images/gscript3.png&quot; style=&quot;max-width:350px&quot; /&gt;
 아까 트리거를 걸어주는 함수만 실행하면 완료!&lt;/p&gt;
 
 &lt;p&gt;지정해둔 URL로 POST 요청이 오는 것을 확인할 수 있다.
