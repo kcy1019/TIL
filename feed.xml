@@ -5,7 +5,7 @@
   
   <link href="https://a.cyclic.dev/feed.xml" rel="self" type="application/atom+xml" />
   <link href="https://a.cyclic.dev/" rel="alternate" type="text/html" />
-  <updated>2019-03-22T12:20:53+00:00</updated>
+  <updated>2019-03-22T12:21:58+00:00</updated>
   <id>https://a.cyclic.dev//</id>
 
   
@@ -126,7 +126,7 @@ $x \in \{1, 2, …, p-1\}$은 모두 $p$와 서로소 관계이므로
 
 &lt;p&gt;&lt;strong&gt;2. $(p - 1)! \equiv -1 ~\mathrm{mod}~ p \Rightarrow p \text{ is a prime. } $&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;$p$가 소수가 아니라고(즉 $q | p$인 소수 $q$ 존재한다고) 가정하자.
+&lt;p&gt;$p$가 소수가 아니라고(즉 $q | p$인 소수 $q$ 가 존재한다고) 가정하자.
 이 경우 $q &amp;lt; p$이므로 $q | (p - 1)!$라는 결과가 나오는데,
 이는 모순이고, 따라서 $p$가 소수임을 확인할 수 있다.&lt;/p&gt;</content>
 
