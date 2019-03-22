@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  
+  
+  <title>Google 설문지 응답을 POST로 받기</title>
+  <meta name="description" content="">
+  
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="https://a.cyclic.dev/day04/">
+  
+  
+  <link rel="alternate" type="application/rss+xml" title="Splinters of Life" href="https://a.cyclic.dev/feed.xml">
+
+  
+
+  
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="kcy1019">
+  <meta name="twitter:title" content="Google 설문지 응답을 POST로 받기">
+  <meta name="twitter:description" content="">
+  
+    <meta name="twitter:creator" content="kcy1019">
+  
+  
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css?family=Bitter:400,400i,700" rel="stylesheet">
+
+  
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      TeX: {
+        equationNumbers: {
+          autoNumber: "AMS"
+        }
+      },
+      tex2jax: {
+        inlineMath: [ ['$','$'] ],
+        displayMath: [ ['$$','$$'] ],
+        processEscapes: true,
+      }
+    });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">Splinters of Life</a>
+
+    <nav class="site-nav">
+      
+        
+        <a class="page-link" href="/archives/">Archives</a>
+      
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    
+      <h1 class="post-title" itemprop="name headline">Google 설문지 응답을 POST로 받기</h1>
+    
+    <p class="post-meta"><time datetime="2019-03-22T12:59:59+00:00" itemprop="datePublished">Mar 22, 2019</time> •
+  
+    
+    
+      
+    
+      
+    
+      
+    
+      
+        <a href="/categories/how-to/">how-to</a>
+      
+    
+  
+
+
+
+</p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <ol id="markdown-toc">
+  <li><a href="#스크립트-만들기" id="markdown-toc-스크립트-만들기">스크립트 만들기</a></li>
+  <li><a href="#스크립트-연동-및-실행하기" id="markdown-toc-스크립트-연동-및-실행하기">스크립트 연동 및 실행하기</a></li>
+</ol>
+
+<h2 id="스크립트-만들기">스크립트 만들기</h2>
+
+<p><img src="/images/gscript0.png" alt="script-editor" /></p>
+
+<p>응답이 기록되는 스프레드 시트에서 스크립트 에디터를 열자.
+<a href="https://developers.google.com/apps-script/">Google Apps Script</a>는 기본적으로 ECMAScript에 G Suite에 접근하는 기능이 추가된 것<sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup>으로,
+스크립트가 구글의 서버에서 실행되는 특징을 갖는다.</p>
+
+<p>설문지 응답에 트리거를 거는 방법과 응답 내용을 JSON POST 요청을 보내는 방법,
+그리고 로깅을 하는 기본적인 방법을 적어보면 다음과 같다.</p>
+
+<p>특이한 점으로는 코드의 실행 단위가 함수이기 때문에 트리거를 걸어주는 부분도 함수로 만들어야 한다는 것이 있다.</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">setUp</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">ScriptApp</span><span class="p">.</span><span class="nx">newTrigger</span><span class="p">(</span><span class="s1">'onFormSubmit'</span><span class="p">).</span><span class="nx">forSpreadsheet</span><span class="p">(</span><span class="nx">SpreadsheetApp</span><span class="p">.</span><span class="nx">getActive</span><span class="p">()).</span><span class="nx">onFormSubmit</span><span class="p">().</span><span class="nx">create</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">onFormSubmit</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">e</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">namedValues</span><span class="p">;</span>
+  <span class="nx">e</span><span class="p">[</span><span class="s1">'name'</span><span class="p">]</span> <span class="o">=</span> <span class="nx">e</span><span class="p">[</span><span class="s1">'field1'</span><span class="p">][</span><span class="mi">0</span><span class="p">];</span>
+  <span class="nx">e</span><span class="p">[</span><span class="s1">'title'</span><span class="p">]</span> <span class="o">=</span> <span class="nx">e</span><span class="p">[</span><span class="s1">'field2'</span><span class="p">][</span><span class="mi">0</span><span class="p">];</span>
+  <span class="nx">e</span><span class="p">[</span><span class="s1">'content'</span><span class="p">]</span> <span class="o">=</span> <span class="nx">e</span><span class="p">[</span><span class="s1">'field2'</span><span class="p">][</span><span class="mi">0</span><span class="p">];</span>
+  <span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">'method'</span> <span class="p">:</span> <span class="s1">'post'</span><span class="p">,</span>
+    <span class="s1">'contentType'</span><span class="p">:</span> <span class="s1">'application/json'</span><span class="p">,</span>
+    <span class="s1">'payload'</span> <span class="p">:</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span>
+  <span class="p">};</span>
+  <span class="nx">Logger</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">UrlFetchApp</span><span class="p">.</span><span class="nx">fetch</span><span class="p">(</span><span class="s1">'http://some-http-url/post-endpoint'</span><span class="p">,</span> <span class="nx">options</span><span class="p">));</span>
+<span class="p">}</span></code></pre></figure>
+
+<h2 id="스크립트-연동-및-실행하기">스크립트 연동 및 실행하기</h2>
+
+<p>이렇게 작성한 코드를 스프레드 시트에서 실행하는 방법을 알아보자.</p>
+
+<p><img src="/images/gscript1.png" alt="fetch-scripts" />
+우선 이렇게 방금 작성한 함수를 가져오고</p>
+
+<p><img src="/images/gscript2.png" alt="register-scripts" />
+함수들을 등록한 다음</p>
+
+<p><img src="/images/gscript3.png" alt="run-constructor" />
+아까 트리거를 걸어주는 함수만 실행하면 완료!</p>
+
+<p>지정해둔 URL로 POST 요청이 오는 것을 확인할 수 있다.
+덧붙여서 <code class="highlighter-rouge">Logger</code>로 출력한 로그는 스크립트 에디터의 메뉴에서 확인할 수 있다.</p>
+
+<div class="footnotes">
+  <ol>
+    <li id="fn:1">
+      <p><a href="https://developers.google.com/apps-script/overview">overview</a> 에 자세히 적혀있다 <a href="#fnref:1" class="reversefootnote">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  </div>
+
+  
+
+</article>
+
+      </div>
+    </main>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <p>
+      
+
+&copy;  - Powered by <a href="https://jekyllrb.com">Jekyll</a> &amp; <a href="https://github.com/yous/whiteglass">whiteglass</a> - Subscribe via <a href="https://a.cyclic.dev/feed.xml">RSS</a>
+
+    </p>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>
