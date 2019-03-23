@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  
+  
+  <title>Google Kick Start 2018 - Round H</title>
+  <meta name="description" content="Goolge Kick Start가 열린다는 메일을 받고 부랴부랴 기출문제를 풀어보았다. Kick Start는 간단히 말해서 Code Jam 보다 쉬운 대회로, “구글에서 일하기 위해 필요한 기술들을 맛볼 수 있는” 대회라고 한다. The three-hour rounds feature a variety of algorithmic challenges, all developed by Google engineers so that you get a taste of the technical skills needed for a career at Google.">
+  
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="https://a.cyclic.dev/day06/">
+  
+  
+  <link rel="alternate" type="application/rss+xml" title="Splinters of Life" href="https://a.cyclic.dev/feed.xml">
+
+  
+
+  
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="kcy1019">
+  <meta name="twitter:title" content="Google Kick Start 2018 - Round H">
+  <meta name="twitter:description" content="Goolge Kick Start가 열린다는 메일을 받고 부랴부랴 기출문제를 풀어보았다. Kick Start는 간단히 말해서 Code Jam 보다 쉬운 대회로, “구글에서 일하기 위해 필요한 기술들을 맛볼 수 있는” 대회라고 한다. The three-hour rounds feature a variety of algorithmic challenges, a...">
+  
+    <meta name="twitter:creator" content="kcy1019">
+  
+  
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css?family=Bitter:400,400i,700" rel="stylesheet">
+
+  
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      TeX: {
+        equationNumbers: {
+          autoNumber: "AMS"
+        }
+      },
+      tex2jax: {
+        inlineMath: [ ['$','$'] ],
+        displayMath: [ ['$$','$$'] ],
+        processEscapes: true,
+      }
+    });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">Splinters of Life</a>
+
+    <nav class="site-nav">
+      
+        
+        <a class="page-link" href="/archives/">Archives</a>
+      
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    
+      <h1 class="post-title" itemprop="name headline">Google Kick Start 2018 - Round H</h1>
+    
+    <p class="post-meta"><time datetime="2019-03-23T15:59:59+00:00" itemprop="datePublished">Mar 23, 2019</time> •
+  
+    
+    
+      
+    
+      
+        <a href="/categories/ps/">ps</a>
+      
+    
+      
+    
+      
+    
+  
+
+
+
+</p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <p><a href="https://codingcompetitions.withgoogle.com/kickstart">Goolge Kick Start</a>가 열린다는 메일을 받고 부랴부랴 기출문제를 풀어보았다.
+Kick Start는 간단히 말해서 Code Jam 보다 쉬운 대회로, “구글에서 일하기 위해 필요한 기술들을 맛볼 수 있는” 대회라고 한다.</p>
+<blockquote>
+  <p>The three-hour rounds feature a variety of algorithmic challenges, all developed by Google engineers so that you get a taste of the technical skills needed for a career at Google.</p>
+</blockquote>
+
+<p>오늘 소개할 문제들은 <a href="https://codingcompetitions.withgoogle.com/kickstart/round/0000000000050ee2">Kick Start 2018 Round H</a>의 문제들이다.</p>
+
+<ol id="markdown-toc">
+  <li><a href="#big-buttons" id="markdown-toc-big-buttons">Big Buttons</a></li>
+  <li><a href="#mural" id="markdown-toc-mural">Mural</a></li>
+  <li><a href="#let-me-count-the-ways" id="markdown-toc-let-me-count-the-ways">Let Me Count The Ways</a></li>
+</ol>
+
+<h2 id="big-buttons">Big Buttons</h2>
+
+<p>R과 B로 길이가 N인 문자열을 만들 때, 주어진 p개의 prefix 중 어느 것과도 겹치지 않는 prefix로 시작하는 문자열의 개수를 구하는 문제이다.</p>
+
+<p>풀이는 간단하게 주어진 prefix 로 <a href="/day05">Trie</a>를 만들고, 루트부터 탐색해서 링크가 끊어지는 부분을 찾아서 개수를 세면 된다.
+사용 가능한 문자가 R과 B 뿐이므로 개수는 쉽게 셀 수 있다. ($2^n$ 꼴)</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Trie</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">link</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">end</span> <span class="o">=</span> <span class="bp">False</span>
+    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
+        <span class="n">c</span><span class="p">,</span> <span class="n">i</span> <span class="o">=</span> <span class="bp">self</span><span class="p">,</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+            <span class="n">nc</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">nc</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">c</span><span class="o">.</span><span class="n">link</span><span class="p">:</span>
+                <span class="n">c</span><span class="o">.</span><span class="n">link</span><span class="p">[</span><span class="n">nc</span><span class="p">]</span> <span class="o">=</span> <span class="n">Trie</span><span class="p">()</span>
+            <span class="n">c</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">link</span><span class="p">[</span><span class="n">nc</span><span class="p">]</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">c</span><span class="o">.</span><span class="n">end</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="k">def</span> <span class="nf">count_feasible</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">end</span> <span class="ow">or</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="mi">0</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[</span><span class="s">'R'</span><span class="p">,</span> <span class="s">'B'</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">x</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">link</span><span class="p">:</span>
+                <span class="n">ret</span> <span class="o">+=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="k">continue</span>
+            <span class="n">ret</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">link</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">.</span><span class="n">count_feasible</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ret</span>
+
+<span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">ss</span><span class="p">):</span>
+    <span class="n">trie</span> <span class="o">=</span> <span class="n">Trie</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">ss</span><span class="p">:</span> <span class="n">trie</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">trie</span><span class="o">.</span><span class="n">count_feasible</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+
+<span class="n">T</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+<span class="k">for</span> <span class="n">C</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">T</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="n">n</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">input</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+    <span class="n">ss</span> <span class="o">=</span> <span class="p">[</span><span class="nb">input</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">p</span><span class="p">)]</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"Case #{}: {}"</span><span class="o">.</span><span class="nb">format</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">ss</span><span class="p">)))</span></code></pre></figure>
+
+<h2 id="mural">Mural</h2>
+
+<p>일렬로 서 있는 n개의 벽에 그림을 그리려 한다.
+처음 그림을 그릴 벽은 마음대로 선택할 수 있고,
+이후에는 먼저 그림을 그린 벽과 인접한 벽에만 그릴 수 있다.</p>
+
+<p>그림을 하나 그릴 때마다 그림과 인접하지 않은 끝 벽이 한 개씩 무너져내린다고 할 때,
+벽이 어떻게 무너지든 상관 없이 확실히 얻을 수 있는 최대의 아름다움을 계산해보자.
+(아름다움은 그림이 그려진 벽의 점수 (*문자열로 주어진다) 의 합이다)</p>
+
+<p>그냥 보면 왼쪽 벽이 무너질지 오른쪽 벽이 무너질지 고민이 되지만,
+사실 연속된 (n+1) / 2 개의 벽은 모두 선택해볼 수 있다:</p>
+
+<p>그림이 그려진 벽과 인접한 벽 또한 무너지지 않기 때문에,
+실제로 무너지기 전에 그림을 그려야 할 벽은 (n+1) / 2 - 2 개가 된다 (양 끝에 인접한 벽에는 가장 마지막에 그리면 되므로).
+이러한 조건을 고려하면, 무조건 ‘중간 벽’부터 선택할 경우 예외 없이 항상 그릴 수 있는 것을 확인할 수 있다.</p>
+
+<p>따라서 partial sum 을 구해두고, 가능한 (n+1) / 2 개의 연속된 벽의 아름다움 중 가장 큰 것을 구하면 끝!</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
+    <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span> <span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">ans</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="n">d</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">ans</span>
+
+<span class="n">T</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+<span class="k">for</span> <span class="n">C</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">T</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"Case #{}: {}"</span><span class="o">.</span><span class="nb">format</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="s">'0'</span> <span class="o">+</span> <span class="nb">input</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">())))</span></code></pre></figure>
+
+<h2 id="let-me-count-the-ways">Let Me Count The Ways</h2>
+
+<p>n 쌍의 커플을 아주 긴 배에 일렬로 태우려 한다.
+이중 m 쌍의 신혼 커플은 서로 인접한 자리에 태우지 않는 경우의 수를 구해보자.</p>
+
+<p><a href="https://en.wikipedia.org/wiki/Inclusion%E2%80%93exclusion_principle">Inclusion-Exclusion (포함-배제) 원리</a> ($|A\cup B| = |A| + |B| - |A\cap B|$) 로 해결할 수 있다.
+원래 이런 방법을 이용할 때에는 모든 집합을 살펴보기 때문에 $2^n$ 의 복잡도를 갖지만,
+여기서는 각 집합의 크기가 동일하므로 $O(m)$ 개의 집합만 살펴보면 해결할 수 있다.</p>
+
+<p>귀찮은 점으로는, n 과 m 이 큰 경우가 있어서 큰 수 모듈러 계산을 해야한다는 것이 있다.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">lru_cache</span>
+<span class="n">factorials</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">MOD</span> <span class="o">=</span> <span class="mi">1000000007</span>
+
+<span class="k">def</span> <span class="nf">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">factorials</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">:</span>
+        <span class="n">factorials</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">factorials</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">factorials</span><span class="p">)</span> <span class="o">%</span> <span class="n">MOD</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">factorials</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">modpow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
+    <span class="n">ret</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">while</span> <span class="n">m</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">m</span> <span class="o">&amp;</span> <span class="mi">1</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">ret</span> <span class="o">=</span> <span class="n">ret</span> <span class="o">*</span> <span class="n">n</span> <span class="o">%</span> <span class="n">MOD</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="n">n</span> <span class="o">*</span> <span class="n">n</span> <span class="o">%</span> <span class="n">MOD</span>
+        <span class="n">m</span> <span class="o">&gt;&gt;=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">ret</span>
+
+<span class="o">@</span><span class="n">lru_cache</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">factorial_inverse</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">modpow</span><span class="p">(</span><span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">MOD</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="o">@</span><span class="n">lru_cache</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">binomial</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">*</span>\
+           <span class="n">factorial_inverse</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="o">%</span> <span class="n">MOD</span> <span class="o">*</span>\
+           <span class="n">factorial_inverse</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">k</span><span class="p">)</span> <span class="o">%</span> <span class="n">MOD</span>
+
+<span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
+    <span class="n">ans</span> <span class="o">=</span> <span class="n">factorial</span><span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">m</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">sign</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="nb">int</span><span class="p">(</span><span class="n">k</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">val</span> <span class="o">=</span> <span class="n">binomial</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="o">*</span>\
+              <span class="n">binomial</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">n</span> <span class="o">-</span> <span class="n">k</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="o">%</span> <span class="n">MOD</span> <span class="o">*</span>\
+              <span class="n">factorial</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="o">%</span> <span class="n">MOD</span> <span class="o">*</span>\
+              <span class="n">factorial</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">k</span><span class="p">))</span> <span class="o">%</span> <span class="n">MOD</span> <span class="o">*</span>\
+              <span class="n">modpow</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="o">%</span> <span class="n">MOD</span>
+        <span class="n">ans</span> <span class="o">+=</span> <span class="n">sign</span> <span class="o">*</span> <span class="n">val</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">ans</span> <span class="o">%</span> <span class="n">MOD</span> <span class="o">+</span> <span class="n">MOD</span><span class="p">)</span> <span class="o">%</span> <span class="n">MOD</span>
+
+<span class="n">T</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+<span class="k">for</span> <span class="n">C</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">T</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="n">n</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">input</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"Case #{}: {}"</span><span class="o">.</span><span class="nb">format</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">)))</span></code></pre></figure>
+
+
+  </div>
+
+  
+
+</article>
+
+      </div>
+    </main>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <p>
+      
+
+&copy;  - Powered by <a href="https://jekyllrb.com">Jekyll</a> &amp; <a href="https://github.com/yous/whiteglass">whiteglass</a> - Subscribe via <a href="https://a.cyclic.dev/feed.xml">RSS</a>
+
+    </p>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>
