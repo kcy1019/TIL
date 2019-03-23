@@ -211,6 +211,7 @@ Kick Start는 간단히 말해서 Code Jam 보다 쉬운 대회로, “구글에
         <span class="n">factorials</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">factorials</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">factorials</span><span class="p">)</span> <span class="o">%</span> <span class="n">MOD</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">factorials</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
 
+<span class="o">@</span><span class="n">lru_cache</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">modpow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
     <span class="n">ret</span> <span class="o">=</span> <span class="mi">1</span>
     <span class="k">while</span> <span class="n">m</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
@@ -224,7 +225,6 @@ Kick Start는 간단히 말해서 Code Jam 보다 쉬운 대회로, “구글에
 <span class="k">def</span> <span class="nf">factorial_inverse</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">modpow</span><span class="p">(</span><span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">MOD</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
 
-<span class="o">@</span><span class="n">lru_cache</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">binomial</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">*</span>\
            <span class="n">factorial_inverse</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="o">%</span> <span class="n">MOD</span> <span class="o">*</span>\
