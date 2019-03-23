@@ -5,7 +5,7 @@
   
   <link href="https://a.cyclic.dev/feed.xml" rel="self" type="application/atom+xml" />
   <link href="https://a.cyclic.dev/" rel="alternate" type="text/html" />
-  <updated>2019-03-23T15:03:21+00:00</updated>
+  <updated>2019-03-23T15:07:35+00:00</updated>
   <id>https://a.cyclic.dev//</id>
 
   
@@ -30,14 +30,7 @@
       <published>2019-03-23T14:59:59+00:00</published>
       <updated>2019-03-23T14:59:59+00:00</updated>
       <id>https://a.cyclic.dev/day05</id>
-      <content type="html" xml:base="https://a.cyclic.dev/day05/">&lt;ol id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#bcg를-검색하는-경우&quot; id=&quot;markdown-toc-bcg를-검색하는-경우&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;BCG&quot;&lt;/code&gt;를 검색하는 경우&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#a를-검색하는-경우&quot; id=&quot;markdown-toc-a를-검색하는-경우&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;A&quot;&lt;/code&gt;를 검색하는 경우&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#삽입&quot; id=&quot;markdown-toc-삽입&quot;&gt;삽입&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#삭제&quot; id=&quot;markdown-toc-삭제&quot;&gt;삭제&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Trie란 Prefix Tree나 Radix Tree라고도 불리는, 트리 형태의 자료구조로, &lt;a href=&quot;http://endic.naver.com/enkrEntry.nhn?sLn=kr&amp;amp;entryId=fb90a6633be444a88bb1898cc188935e&amp;amp;query=retrieval&quot;&gt;re&lt;em&gt;TRIE&lt;/em&gt;val&lt;/a&gt; 에서 따온 이름이라고 한다.&lt;/p&gt;
+      <content type="html" xml:base="https://a.cyclic.dev/day05/">&lt;p&gt;Trie란 Prefix Tree나 Radix Tree라고도 불리는, 트리 형태의 자료구조로, &lt;a href=&quot;http://endic.naver.com/enkrEntry.nhn?sLn=kr&amp;amp;entryId=fb90a6633be444a88bb1898cc188935e&amp;amp;query=retrieval&quot;&gt;re&lt;em&gt;TRIE&lt;/em&gt;val&lt;/a&gt; 에서 따온 이름이라고 한다.&lt;/p&gt;
 
 &lt;p&gt;Trie는 각 노드가 &lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;으로 된 &lt;code class=&quot;highlighter-rouge&quot;&gt;key&lt;/code&gt;를 나타내고, 각 엣지 (간선)가 하나의 알파벳을 나타내는 트리 형태의 자료구조로, &lt;code class=&quot;highlighter-rouge&quot;&gt;key-value&lt;/code&gt; 쌍을 저장하도록 하면 &lt;code class=&quot;highlighter-rouge&quot;&gt;map&lt;/code&gt;처럼 &lt;code class=&quot;highlighter-rouge&quot;&gt;associative array&lt;/code&gt;로 이용할 수 있고, 그냥 &lt;code class=&quot;highlighter-rouge&quot;&gt;key&lt;/code&gt;만 저장하면 어떤 &lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;이 집합에 속하는지 확인하기 위한 &lt;code class=&quot;highlighter-rouge&quot;&gt;set&lt;/code&gt;처럼 삽입/삭제가 가능한 집합 자료구조로 이용할 수 있다.&lt;/p&gt;
 
@@ -54,12 +47,12 @@
   &lt;tbody&gt;
     &lt;tr&gt;
       &lt;td&gt;삽입&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;$O(LlogN)$&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;$O(L\mathrm{log}N)$&lt;/td&gt;
       &lt;td style=&quot;text-align: center&quot;&gt;$O(L)$&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;검색&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;$O(LlogN)$&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;$O(L\mathrm{log}N)$&lt;/td&gt;
       &lt;td style=&quot;text-align: center&quot;&gt;$O(L)$&lt;/td&gt;
     &lt;/tr&gt;
   &lt;/tbody&gt;
@@ -71,7 +64,14 @@
 
 &lt;p&gt;$\otimes$로 표현되는 노드는 해당 노드로 끝나는 문자열이 존재한다는 의미인데, 예를 들어 이 집합에 &lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;A&quot;&lt;/code&gt;는 존재하지 않지만 &lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;AA&quot;&lt;/code&gt;는 존재하므로 &lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;AA&quot;&lt;/code&gt;를 나타내는 노드에서는 $\otimes$로 표현되는 노드로의 간선이 존재하지만 &lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;A&quot;&lt;/code&gt;를 나타내는 노드에서는 간선이 존재하지 않는 것을 확인할 수 있다. (이후 $\otimes$ 로 나타나는 노드로 연결되는 간선을 &lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;$&quot;&lt;/code&gt;로 표현)&lt;/p&gt;
 
-&lt;p&gt;연산의 경우 BST처럼 삽입 과정이 검색과 굉장히 닮아있기 때문에, 검색부터 살펴보도록 하자: 1) &lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;BCG&quot;&lt;/code&gt;를 검색하는 경우, 2) &lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;A&quot;&lt;/code&gt;를 검색하는 경우.&lt;/p&gt;
+&lt;p&gt;연산의 경우 BST처럼 삽입 과정이 검색과 굉장히 닮아있기 때문에, 검색부터 살펴보도록 하자.&lt;/p&gt;
+
+&lt;ol id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#bcg를-검색하는-경우&quot; id=&quot;markdown-toc-bcg를-검색하는-경우&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;BCG&quot;&lt;/code&gt;를 검색하는 경우&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#a를-검색하는-경우&quot; id=&quot;markdown-toc-a를-검색하는-경우&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;A&quot;&lt;/code&gt;를 검색하는 경우&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#삽입&quot; id=&quot;markdown-toc-삽입&quot;&gt;삽입&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#삭제&quot; id=&quot;markdown-toc-삭제&quot;&gt;삭제&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
 
 &lt;h3 id=&quot;bcg를-검색하는-경우&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;BCG&quot;&lt;/code&gt;를 검색하는 경우&lt;/h3&gt;
 
@@ -108,7 +108,7 @@
       
 
       
-        <summary type="html"></summary>
+        <summary type="html">Trie란 Prefix Tree나 Radix Tree라고도 불리는, 트리 형태의 자료구조로, reTRIEval 에서 따온 이름이라고 한다.</summary>
       
 
       
