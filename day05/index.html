@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  
+  
+  <title>Trie</title>
+  <meta name="description" content="">
+  
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="https://a.cyclic.dev/day05/">
+  
+  
+  <link rel="alternate" type="application/rss+xml" title="Splinters of Life" href="https://a.cyclic.dev/feed.xml">
+
+  
+
+  
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="kcy1019">
+  <meta name="twitter:title" content="Trie">
+  <meta name="twitter:description" content="">
+  
+    <meta name="twitter:creator" content="kcy1019">
+  
+  
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css?family=Bitter:400,400i,700" rel="stylesheet">
+
+  
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      TeX: {
+        equationNumbers: {
+          autoNumber: "AMS"
+        }
+      },
+      tex2jax: {
+        inlineMath: [ ['$','$'] ],
+        displayMath: [ ['$$','$$'] ],
+        processEscapes: true,
+      }
+    });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">Splinters of Life</a>
+
+    <nav class="site-nav">
+      
+        
+        <a class="page-link" href="/archives/">Archives</a>
+      
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    
+      <h1 class="post-title" itemprop="name headline">Trie</h1>
+    
+    <p class="post-meta"><time datetime="2019-03-23T14:59:59+00:00" itemprop="datePublished">Mar 23, 2019</time> •
+  
+    
+    
+      
+    
+      
+        <a href="/categories/ps/">ps</a>
+      
+    
+      
+    
+      
+    
+  
+
+
+
+</p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <ol id="markdown-toc">
+  <li><a href="#bcg를-검색하는-경우" id="markdown-toc-bcg를-검색하는-경우"><code class="highlighter-rouge">"BCG"</code>를 검색하는 경우</a></li>
+  <li><a href="#a를-검색하는-경우" id="markdown-toc-a를-검색하는-경우"><code class="highlighter-rouge">"A"</code>를 검색하는 경우</a></li>
+  <li><a href="#삽입" id="markdown-toc-삽입">삽입</a></li>
+  <li><a href="#삭제" id="markdown-toc-삭제">삭제</a></li>
+</ol>
+
+<p>Trie란 Prefix Tree나 Radix Tree라고도 불리는, 트리 형태의 자료구조로, <a href="http://endic.naver.com/enkrEntry.nhn?sLn=kr&amp;entryId=fb90a6633be444a88bb1898cc188935e&amp;query=retrieval">re<em>TRIE</em>val</a> 에서 따온 이름이라고 한다.</p>
+
+<p>Trie는 각 노드가 <code class="highlighter-rouge">string</code>으로 된 <code class="highlighter-rouge">key</code>를 나타내고, 각 엣지 (간선)가 하나의 알파벳을 나타내는 트리 형태의 자료구조로, <code class="highlighter-rouge">key-value</code> 쌍을 저장하도록 하면 <code class="highlighter-rouge">map</code>처럼 <code class="highlighter-rouge">associative array</code>로 이용할 수 있고, 그냥 <code class="highlighter-rouge">key</code>만 저장하면 어떤 <code class="highlighter-rouge">string</code>이 집합에 속하는지 확인하기 위한 <code class="highlighter-rouge">set</code>처럼 삽입/삭제가 가능한 집합 자료구조로 이용할 수 있다.</p>
+
+<p>흔히 사용되는 <code class="highlighter-rouge">std::map/std::set</code>의 내부 구현인 <code class="highlighter-rouge">Red-black tree</code> (<code class="highlighter-rouge">balanced binary search tree/self-balancing binary search tree</code>)와 비교해보면 각 연산 (검색, 삽입)이 다음과 같은 시간 복잡도를 갖는다 ($L$: <code class="highlighter-rouge">key</code>로 이용되는 문자열의 최대 길이, $N$: <code class="highlighter-rouge">key</code>의 개수, 즉 자료구조의 원소 개수):</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>연산</th>
+      <th style="text-align: center">BBST</th>
+      <th style="text-align: center">Trie</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>삽입</td>
+      <td style="text-align: center">$O(LlogN)$</td>
+      <td style="text-align: center">$O(L)$</td>
+    </tr>
+    <tr>
+      <td>검색</td>
+      <td style="text-align: center">$O(LlogN)$</td>
+      <td style="text-align: center">$O(L)$</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><code class="highlighter-rouge">{"AA", "AC", "BC", "BCG", "C", "CC"}</code> 의 문자열을 원소로 갖는 Trie를 그림으로 나타내면 다음과 같다:</p>
+
+<p><img src="/images/trie-0.png" style="width:75%;max-width:600px" /></p>
+
+<p>$\otimes$로 표현되는 노드는 해당 노드로 끝나는 문자열이 존재한다는 의미인데, 예를 들어 이 집합에 <code class="highlighter-rouge">"A"</code>는 존재하지 않지만 <code class="highlighter-rouge">"AA"</code>는 존재하므로 <code class="highlighter-rouge">"AA"</code>를 나타내는 노드에서는 $\otimes$로 표현되는 노드로의 간선이 존재하지만 <code class="highlighter-rouge">"A"</code>를 나타내는 노드에서는 간선이 존재하지 않는 것을 확인할 수 있다. (이후 $\otimes$ 로 나타나는 노드로 연결되는 간선을 <code class="highlighter-rouge">"$"</code>로 표현)</p>
+
+<p>연산의 경우 BST처럼 삽입 과정이 검색과 굉장히 닮아있기 때문에, 검색부터 살펴보도록 하자: 1) <code class="highlighter-rouge">"BCG"</code>를 검색하는 경우, 2) <code class="highlighter-rouge">"A"</code>를 검색하는 경우.</p>
+
+<h3 id="bcg를-검색하는-경우"><code class="highlighter-rouge">"BCG"</code>를 검색하는 경우</h3>
+
+<p>루트에서 시작해서, 해당 알파벳을 나타내는 간선을 따라 쭉쭉 따라가면 끝. 단, <code class="highlighter-rouge">"BGC"</code>를  <code class="highlighter-rouge">"BCG$"</code>로 고려해야 한다. 만약 중간에 <code class="highlighter-rouge">NULL</code>을 만나게 된다면 (존재하지 않는 간선을 선택하게 된다면) 해당 문자열은 집합에 존재하지 않는다는 결론이 나오고, 그렇지 않을 경우 해당 문자열이 집합에 존재한다는 것을 확인할 수 있다.</p>
+
+<p><img src="/images/trie-1.png" style="width:75%;max-width:600px" /></p>
+
+<h3 id="a를-검색하는-경우"><code class="highlighter-rouge">"A"</code>를 검색하는 경우</h3>
+
+<p>마찬가지로 <code class="highlighter-rouge">"A$"</code>를 생각하면, 중간에 <code class="highlighter-rouge">$</code>을 나타내는 간선이 존재하지 않아 실패하는 것을 볼 수 있다.</p>
+
+<p><img src="/images/trie-2.png" style="width:75%;max-width:600px" /></p>
+
+<h3 id="삽입">삽입</h3>
+
+<p>검색을 보면서 깨달았겠지만, 삽입은 검색을 하는 도중 실패한 부분부터 간선을 추가해나가는 식으로 반복하면 간단!</p>
+
+<h3 id="삭제">삭제</h3>
+
+<p>삭제 역시도 각 노드에 rereference count 를 관리하면서 0이 되는 순간 노드와 간선을 지워주는 형태로 구현하면 간단하다.</p>
+
+  </div>
+
+  
+
+</article>
+
+      </div>
+    </main>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <p>
+      
+
+&copy;  - Powered by <a href="https://jekyllrb.com">Jekyll</a> &amp; <a href="https://github.com/yous/whiteglass">whiteglass</a> - Subscribe via <a href="https://a.cyclic.dev/feed.xml">RSS</a>
+
+    </p>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>
