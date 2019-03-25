@@ -3,3 +3,5 @@
 main:
   - title: "Archives"
     url: /archives/
+  - title: "About"
+    url: https://lucent.me
