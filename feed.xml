@@ -5,7 +5,7 @@
   
   <link href="https://a.cyclic.dev/feed.xml" rel="self" type="application/atom+xml" />
   <link href="https://a.cyclic.dev/" rel="alternate" type="text/html" />
-  <updated>2019-03-25T15:25:51+00:00</updated>
+  <updated>2019-03-25T15:27:40+00:00</updated>
   <id>https://a.cyclic.dev//</id>
 
   
@@ -32,11 +32,11 @@
       <id>https://a.cyclic.dev/day07</id>
       <content type="html" xml:base="https://a.cyclic.dev/day07/">&lt;p&gt;2019년의 첫 킥스타트 대회!
 엄청 쉬울거라고 생각하고 덤볐으나, 놀라울 정도로 망했다ㅠㅠ
-어제 기출로 풀어본 작년 &lt;a href=&quot;/day06&quot;&gt;Round H&lt;/a&gt;보다 훨씬 어렵게 느껴졌다.&lt;/p&gt;
+어제 기출로 풀어본 작년 [Round H][roundh]보다 훨씬 어렵게 느껴졌다.&lt;/p&gt;
 
-&lt;p&gt;오늘은 2번째 문제였던 Parcel을 풀어보자.&lt;/p&gt;
+&lt;p&gt;오늘은 2번째 문제였던 &lt;a href=&quot;https://codingcompetitions.withgoogle.com/kickstart/round/0000000000050e01/000000000006987d&quot;&gt;Parcel&lt;/a&gt;을 풀어보자.&lt;/p&gt;
 
-&lt;h2 id=&quot;parcel&quot;&gt;Parcel&lt;/h2&gt;
+&lt;h2 id=&quot;parcel&quot;&gt;&lt;a href=&quot;https://codingcompetitions.withgoogle.com/kickstart/round/0000000000050e01/000000000006987d&quot;&gt;Parcel&lt;/a&gt;&lt;/h2&gt;
 
 &lt;p&gt;격자로 된 도시에 0개 이상의 우체국이 위치하고 있다.
 이 도시에 최대 1개의 우체국을 새로 배치할 수 있을 때,
@@ -265,7 +265,7 @@ $L_1$에서의 ‘원’은 마름모, 즉 네 변의 길이가 같은 사각형
       
 
       
-        <summary type="html">2019년의 첫 킥스타트 대회! 엄청 쉬울거라고 생각하고 덤볐으나, 놀라울 정도로 망했다ㅠㅠ 어제 기출로 풀어본 작년 Round H보다 훨씬 어렵게 느껴졌다.</summary>
+        <summary type="html">2019년의 첫 킥스타트 대회! 엄청 쉬울거라고 생각하고 덤볐으나, 놀라울 정도로 망했다ㅠㅠ 어제 기출로 풀어본 작년 [Round H][roundh]보다 훨씬 어렵게 느껴졌다.</summary>
       
 
       
