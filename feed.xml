@@ -5,7 +5,7 @@
   
   <link href="https://a.cyclic.dev/feed.xml" rel="self" type="application/atom+xml" />
   <link href="https://a.cyclic.dev/" rel="alternate" type="text/html" />
-  <updated>2019-04-05T14:58:49+00:00</updated>
+  <updated>2019-04-06T14:38:03+00:00</updated>
   <id>https://a.cyclic.dev//</id>
 
   
@@ -18,6 +18,148 @@
 
   
 
+  
+  
+    <entry>
+      
+      <title type="html">Ubuntu 서버에서 AFP로 디렉토리 공유하기</title>
+      
+      
+      <link href="https://a.cyclic.dev/day19/" rel="alternate" type="text/html" title="Ubuntu 서버에서 AFP로 디렉토리 공유하기" />
+      
+      <published>2019-04-06T13:49:30+00:00</published>
+      <updated>2019-04-06T13:49:30+00:00</updated>
+      <id>https://a.cyclic.dev/day19</id>
+      <content type="html" xml:base="https://a.cyclic.dev/day19/">&lt;p&gt;오늘은 드디어 여행 사진을 보정하려고 했으나, 맥북의 디스크 용량이 너무 부족해서 진행이 어려웠다. 결국 용량 문제를 해결하기 위해서 서버 컴퓨터의 스토리지를 네트워크로 연결하는 방법까지 알아보게 되었다.&lt;/p&gt;
+
+&lt;ol id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#apple-filing-protocol&quot; id=&quot;markdown-toc-apple-filing-protocol&quot;&gt;Apple Filing Protocol&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#install-netatalk-3-on-ubuntu&quot; id=&quot;markdown-toc-install-netatalk-3-on-ubuntu&quot;&gt;Install Netatalk 3 on Ubuntu&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#mount-afp-remote-volume&quot; id=&quot;markdown-toc-mount-afp-remote-volume&quot;&gt;Mount AFP Remote Volume&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;apple-filing-protocol&quot;&gt;Apple Filing Protocol&lt;/h2&gt;
+
+&lt;p&gt;오늘 처음 알게 된 프로토콜인데, 애플의 독점 파일 서비스 프로토콜로, 가장 흔한 예로는 맥을 Time Machine과 연결할 때에 이용하는 것으로 보인다. 특이한 점으로는 Spotlight와 Avahi(Bonjour)를 지원하는 등 맥의 기능을 대부분 지원하는 점이 있다.
+또, 파일의 전송 속도 역시 SMBv3과 비교할 수 있을 만큼 빠르다고 알려져 있다.
+개인적으로 SMB와 NFS에는 조금 안좋은 기억이 있기도 하고, 새로운걸 설정해보고 싶은 마음에 이번에는 AFP를 선택해 보았다.&lt;/p&gt;
+
+&lt;h2 id=&quot;install-netatalk-3-on-ubuntu&quot;&gt;Install Netatalk 3 on Ubuntu&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://netatalk.sourceforge.net/&quot;&gt;Netatalk&lt;/a&gt;는 AFP 서버의 오픈 소스 구현체로, Linux / BSD / UNIX에서 이용할 수 있다.
+Ubuntu에 기본 패키지로 들어있을 만큼&lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; 유서깊은 구현체인 것으로 보여서 우선은 이걸로 시도해 보았다.
+기본적인 내용은 &lt;a href=&quot;http://netatalk.sourceforge.net/wiki/index.php/Install_Netatalk_3.1.12_on_Ubuntu_18.10_Cosmic&quot;&gt;공식 매뉴얼&lt;/a&gt;을 참고했고, 매뉴얼에 빠진 부분(ㅠㅠ)을 노가다로 채워보았다.&lt;/p&gt;
+
+&lt;p&gt;설치는 다음과 같이 빌드하면 끝!&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt; build-essential &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+                      libevent-dev &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+                      libssl-dev &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+                      libgcrypt-dev &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+                      libkrb5-dev &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+                      libpam0g-dev &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+                      libwrap0-dev &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+                      libdb-dev &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+                      libdb++-dev &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+                      libtdb-dev &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+                      libmysqlclient-dev &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+                      avahi-daemon &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+                      libavahi-client-dev &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+                      libacl1-dev &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+                      libldap2-dev &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+                      libcrack2-dev &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+                      systemtap-sdt-dev &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+                      libdbus-1-dev &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+                      libdbus-glib-1-dev &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+                      libglib2.0-dev &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+                      libio-socket-inet6-perl &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+                      tracker &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+                      libtracker-sparql-2.0-dev &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+                      libtracker-miner-2.0-dev
+&lt;span class=&quot;c&quot;&gt;# 아래 미러에서 직접 다운로드&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# https://sourceforge.net/projects/netatalk/files/netatalk/3.1.12/netatalk-3.1.12.tar.gz/download?use_mirror=jaist&amp;amp;download=&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;tar &lt;/span&gt;xf nettalk-3.1.12.tar.gz
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;nettalk-3.1.12
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;./configure &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;--with-init-style&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;debian-systemd &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;--without-libevent&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;--with-cracklib&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;--without-ldap&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\ &lt;/span&gt;&lt;span class=&quot;c&quot;&gt;# 저는 안 써요&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;--without-kerberos&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\ &lt;/span&gt;&lt;span class=&quot;c&quot;&gt;# 저는 안 써요&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;--with-pam-confdir&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/etc/pam.d &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;--with-dbus-daemon&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/usr/bin/dbus-daemon &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;--with-dbus-sysconf-dir&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/etc/dbus-1/system.d &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;--with-tracker-pkgconfig-version&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;2.0
+        &lt;span class=&quot;nt&quot;&gt;--enable-debian&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;--enable-zeroconf&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;make &lt;span class=&quot;nt&quot;&gt;-j10&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;make &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;다만 이대로는 아직 사용할 수가 없고, 서버 설정을 해 주어야 한다.
+&lt;code class=&quot;highlighter-rouge&quot;&gt;/usr/local/etc/afp.conf&lt;/code&gt;를 뜯어고치자!&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[Global]
+hostname = Shared # &amp;lt;-- 컴퓨터 이름 같은 역할
+hosts allow = 0.0.0.0/0 # &amp;lt;-- ACL을 간단하게 CIDR로 설정 가능하다
+afp listen = 1.23.45.67:548 # &amp;lt;-- IP:PORT 형태로 Address를 지정해줘도 되고(여러 개도 가능)
+afp interfaces = enp0s31f6 # &amp;lt;-- NIC를 지정해주어도 된다.
+mimic model = TimeCapsule6,116 # &amp;lt;-- TimeCapsule인 척 해서, 타임캡슐로 사용할 수 있다.
+zeroconf = yes # &amp;lt;-- Bonjour (Avahi) 를 이용해서 설정을 단순화
+uam list = uams_dhx.so uams_dhx2.so # &amp;lt;-- 암호화 scheme인데, 사실 실제 사용하는지는 잘..
+spotlight = yes # &amp;lt;-- Spotlight Indexing 여부
+log file = /var/log/netatalk.log
+fqdn = my.some.domain:548 # &amp;lt;-- 이렇게 fqdn을 지정해줄 수도 있다.
+
+[Shared] # &amp;lt;-- 이후에 경로명이 됩니다
+path = /mnt/ssd2/shared # &amp;lt;-- 서버에서의 실제 디렉토리 경로
+valid users = lucent # &amp;lt;-- 유저 제한 ACL
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;이제 설정까지 고쳤으면, 서비스만 실행하면 끝!!&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl &lt;span class=&quot;nb&quot;&gt;enable &lt;/span&gt;netatalk.service
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl &lt;span class=&quot;nb&quot;&gt;enable &lt;/span&gt;avahi-daemon.service
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl start netatalk.service
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl start avahi-daemon.service
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;ufw allow 548/tcp &lt;span class=&quot;c&quot;&gt;# 방화벽 허용&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;mount-afp-remote-volume&quot;&gt;Mount AFP Remote Volume&lt;/h2&gt;
+
+&lt;p&gt;맥에서 리모트 디렉토리에 연결하는 방법은 GUI를 이용하면 된다.
+Finder에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;CMD+K&lt;/code&gt;를 누르고, 도메인이나 IP 주소를 입력한 다음 엔터!
+&lt;code class=&quot;highlighter-rouge&quot;&gt;afp://12.34.56.78&lt;/code&gt;나 &lt;code class=&quot;highlighter-rouge&quot;&gt;afp://my.domain&lt;/code&gt; 같이 입력하면 된다.
+여기까지 성공했다면 로그인 창이 나타나는데, 여기에는 리눅스 계정의 정보를 입력하면 된다.&lt;/p&gt;
+
+&lt;div class=&quot;footnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:1&quot;&gt;
+      &lt;p&gt;근데 현재 &lt;code class=&quot;highlighter-rouge&quot;&gt;apt install&lt;/code&gt;로 설치하면 제대로 설치되지 않는 문제가 있다. &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;</content>
+
+      
+      
+      
+      
+      
+
+      
+
+      
+        <category term="howto" />
+      
+
+      
+
+      
+        <summary type="html">오늘은 드디어 여행 사진을 보정하려고 했으나, 맥북의 디스크 용량이 너무 부족해서 진행이 어려웠다. 결국 용량 문제를 해결하기 위해서 서버 컴퓨터의 스토리지를 네트워크로 연결하는 방법까지 알아보게 되었다.</summary>
+      
+
+      
+      
+    </entry>
+  
   
   
     <entry>

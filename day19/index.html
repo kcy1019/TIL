@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  
+  
+  <title>Ubuntu 서버에서 AFP로 디렉토리 공유하기</title>
+  <meta name="description" content="오늘은 드디어 여행 사진을 보정하려고 했으나, 맥북의 디스크 용량이 너무 부족해서 진행이 어려웠다. 결국 용량 문제를 해결하기 위해서 서버 컴퓨터의 스토리지를 네트워크로 연결하는 방법까지 알아보게 되었다.">
+  
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="https://a.cyclic.dev/day19/">
+  
+  
+  <link rel="alternate" type="application/rss+xml" title="Splinters of Life" href="https://a.cyclic.dev/feed.xml">
+
+  
+
+  
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="kcy1019">
+  <meta name="twitter:title" content="Ubuntu 서버에서 AFP로 디렉토리 공유하기">
+  <meta name="twitter:description" content="오늘은 드디어 여행 사진을 보정하려고 했으나, 맥북의 디스크 용량이 너무 부족해서 진행이 어려웠다. 결국 용량 문제를 해결하기 위해서 서버 컴퓨터의 스토리지를 네트워크로 연결하는 방법까지 알아보게 되었다.">
+  
+    <meta name="twitter:creator" content="kcy1019">
+  
+  
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css?family=Bitter:400,400i,700" rel="stylesheet">
+
+  
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      TeX: {
+        equationNumbers: {
+          autoNumber: "AMS"
+        }
+      },
+      tex2jax: {
+        inlineMath: [ ['$','$'] ],
+        displayMath: [ ['$$','$$'] ],
+        processEscapes: true,
+      }
+    });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">Splinters of Life</a>
+
+    <nav class="site-nav">
+      
+        
+        <a class="page-link" href="/archives/">Archives</a>
+      
+        
+        <a class="page-link" href="https://lucent.me">About</a>
+      
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    
+      <h1 class="post-title" itemprop="name headline">Ubuntu 서버에서 AFP로 디렉토리 공유하기</h1>
+    
+    <p class="post-meta"><time datetime="2019-04-06T13:49:30+00:00" itemprop="datePublished">Apr 6, 2019</time> •
+  
+    
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        <a href="/categories/howto/">howto</a>
+      
+    
+  
+
+
+
+</p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <p>오늘은 드디어 여행 사진을 보정하려고 했으나, 맥북의 디스크 용량이 너무 부족해서 진행이 어려웠다. 결국 용량 문제를 해결하기 위해서 서버 컴퓨터의 스토리지를 네트워크로 연결하는 방법까지 알아보게 되었다.</p>
+
+<ol id="markdown-toc">
+  <li><a href="#apple-filing-protocol" id="markdown-toc-apple-filing-protocol">Apple Filing Protocol</a></li>
+  <li><a href="#install-netatalk-3-on-ubuntu" id="markdown-toc-install-netatalk-3-on-ubuntu">Install Netatalk 3 on Ubuntu</a></li>
+  <li><a href="#mount-afp-remote-volume" id="markdown-toc-mount-afp-remote-volume">Mount AFP Remote Volume</a></li>
+</ol>
+
+<h2 id="apple-filing-protocol">Apple Filing Protocol</h2>
+
+<p>오늘 처음 알게 된 프로토콜인데, 애플의 독점 파일 서비스 프로토콜로, 가장 흔한 예로는 맥을 Time Machine과 연결할 때에 이용하는 것으로 보인다. 특이한 점으로는 Spotlight와 Avahi(Bonjour)를 지원하는 등 맥의 기능을 대부분 지원하는 점이 있다.
+또, 파일의 전송 속도 역시 SMBv3과 비교할 수 있을 만큼 빠르다고 알려져 있다.
+개인적으로 SMB와 NFS에는 조금 안좋은 기억이 있기도 하고, 새로운걸 설정해보고 싶은 마음에 이번에는 AFP를 선택해 보았다.</p>
+
+<h2 id="install-netatalk-3-on-ubuntu">Install Netatalk 3 on Ubuntu</h2>
+
+<p><a href="http://netatalk.sourceforge.net/">Netatalk</a>는 AFP 서버의 오픈 소스 구현체로, Linux / BSD / UNIX에서 이용할 수 있다.
+Ubuntu에 기본 패키지로 들어있을 만큼<sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup> 유서깊은 구현체인 것으로 보여서 우선은 이걸로 시도해 보았다.
+기본적인 내용은 <a href="http://netatalk.sourceforge.net/wiki/index.php/Install_Netatalk_3.1.12_on_Ubuntu_18.10_Cosmic">공식 매뉴얼</a>을 참고했고, 매뉴얼에 빠진 부분(ㅠㅠ)을 노가다로 채워보았다.</p>
+
+<p>설치는 다음과 같이 빌드하면 끝!</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">sudo </span>apt <span class="nb">install</span> <span class="nt">-y</span> build-essential <span class="se">\</span>
+                      libevent-dev <span class="se">\</span>
+                      libssl-dev <span class="se">\</span>
+                      libgcrypt-dev <span class="se">\</span>
+                      libkrb5-dev <span class="se">\</span>
+                      libpam0g-dev <span class="se">\</span>
+                      libwrap0-dev <span class="se">\</span>
+                      libdb-dev <span class="se">\</span>
+                      libdb++-dev <span class="se">\</span>
+                      libtdb-dev <span class="se">\</span>
+                      libmysqlclient-dev <span class="se">\</span>
+                      avahi-daemon <span class="se">\</span>
+                      libavahi-client-dev <span class="se">\</span>
+                      libacl1-dev <span class="se">\</span>
+                      libldap2-dev <span class="se">\</span>
+                      libcrack2-dev <span class="se">\</span>
+                      systemtap-sdt-dev <span class="se">\</span>
+                      libdbus-1-dev <span class="se">\</span>
+                      libdbus-glib-1-dev <span class="se">\</span>
+                      libglib2.0-dev <span class="se">\</span>
+                      libio-socket-inet6-perl <span class="se">\</span>
+                      tracker <span class="se">\</span>
+                      libtracker-sparql-2.0-dev <span class="se">\</span>
+                      libtracker-miner-2.0-dev
+<span class="c"># 아래 미러에서 직접 다운로드</span>
+<span class="c"># https://sourceforge.net/projects/netatalk/files/netatalk/3.1.12/netatalk-3.1.12.tar.gz/download?use_mirror=jaist&amp;download=</span>
+<span class="nv">$ </span><span class="nb">tar </span>xf nettalk-3.1.12.tar.gz
+<span class="nv">$ </span><span class="nb">cd </span>nettalk-3.1.12
+<span class="nv">$ </span>./configure <span class="se">\</span>
+        <span class="nt">--with-init-style</span><span class="o">=</span>debian-systemd <span class="se">\</span>
+        <span class="nt">--without-libevent</span> <span class="se">\</span>
+        <span class="nt">--with-cracklib</span> <span class="se">\</span>
+        <span class="nt">--without-ldap</span> <span class="se">\ </span><span class="c"># 저는 안 써요</span>
+        <span class="nt">--without-kerberos</span> <span class="se">\ </span><span class="c"># 저는 안 써요</span>
+        <span class="nt">--with-pam-confdir</span><span class="o">=</span>/etc/pam.d <span class="se">\</span>
+        <span class="nt">--with-dbus-daemon</span><span class="o">=</span>/usr/bin/dbus-daemon <span class="se">\</span>
+        <span class="nt">--with-dbus-sysconf-dir</span><span class="o">=</span>/etc/dbus-1/system.d <span class="se">\</span>
+        <span class="nt">--with-tracker-pkgconfig-version</span><span class="o">=</span>2.0
+        <span class="nt">--enable-debian</span> <span class="se">\</span>
+        <span class="nt">--enable-zeroconf</span>
+<span class="nv">$ </span>make <span class="nt">-j10</span>
+<span class="nv">$ </span><span class="nb">sudo </span>make <span class="nb">install</span></code></pre></figure>
+
+<p>다만 이대로는 아직 사용할 수가 없고, 서버 설정을 해 주어야 한다.
+<code class="highlighter-rouge">/usr/local/etc/afp.conf</code>를 뜯어고치자!</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[Global]
+hostname = Shared # &lt;-- 컴퓨터 이름 같은 역할
+hosts allow = 0.0.0.0/0 # &lt;-- ACL을 간단하게 CIDR로 설정 가능하다
+afp listen = 1.23.45.67:548 # &lt;-- IP:PORT 형태로 Address를 지정해줘도 되고(여러 개도 가능)
+afp interfaces = enp0s31f6 # &lt;-- NIC를 지정해주어도 된다.
+mimic model = TimeCapsule6,116 # &lt;-- TimeCapsule인 척 해서, 타임캡슐로 사용할 수 있다.
+zeroconf = yes # &lt;-- Bonjour (Avahi) 를 이용해서 설정을 단순화
+uam list = uams_dhx.so uams_dhx2.so # &lt;-- 암호화 scheme인데, 사실 실제 사용하는지는 잘..
+spotlight = yes # &lt;-- Spotlight Indexing 여부
+log file = /var/log/netatalk.log
+fqdn = my.some.domain:548 # &lt;-- 이렇게 fqdn을 지정해줄 수도 있다.
+
+[Shared] # &lt;-- 이후에 경로명이 됩니다
+path = /mnt/ssd2/shared # &lt;-- 서버에서의 실제 디렉토리 경로
+valid users = lucent # &lt;-- 유저 제한 ACL
+</code></pre></div></div>
+
+<p>이제 설정까지 고쳤으면, 서비스만 실행하면 끝!!</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">sudo </span>systemctl <span class="nb">enable </span>netatalk.service
+<span class="nv">$ </span><span class="nb">sudo </span>systemctl <span class="nb">enable </span>avahi-daemon.service
+<span class="nv">$ </span><span class="nb">sudo </span>systemctl start netatalk.service
+<span class="nv">$ </span><span class="nb">sudo </span>systemctl start avahi-daemon.service
+<span class="nv">$ </span><span class="nb">sudo </span>ufw allow 548/tcp <span class="c"># 방화벽 허용</span></code></pre></figure>
+
+<h2 id="mount-afp-remote-volume">Mount AFP Remote Volume</h2>
+
+<p>맥에서 리모트 디렉토리에 연결하는 방법은 GUI를 이용하면 된다.
+Finder에서 <code class="highlighter-rouge">CMD+K</code>를 누르고, 도메인이나 IP 주소를 입력한 다음 엔터!
+<code class="highlighter-rouge">afp://12.34.56.78</code>나 <code class="highlighter-rouge">afp://my.domain</code> 같이 입력하면 된다.
+여기까지 성공했다면 로그인 창이 나타나는데, 여기에는 리눅스 계정의 정보를 입력하면 된다.</p>
+
+<div class="footnotes">
+  <ol>
+    <li id="fn:1">
+      <p>근데 현재 <code class="highlighter-rouge">apt install</code>로 설치하면 제대로 설치되지 않는 문제가 있다. <a href="#fnref:1" class="reversefootnote">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  </div>
+
+  
+
+</article>
+
+      </div>
+    </main>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <p>
+      
+
+&copy;  - Powered by <a href="https://jekyllrb.com">Jekyll</a> &amp; <a href="https://github.com/yous/whiteglass">whiteglass</a> - Subscribe via <a href="https://a.cyclic.dev/feed.xml">RSS</a>
+
+    </p>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>
