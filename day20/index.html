@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  
+  
+  <title>Google Code Jam 2019 Qualification Round</title>
+  <meta name="description" content="이번 GCJ 퀄 라운드는 간단한 아이디어로 풀리는 문제가 많아서 재미있었다. 물론 C번은 런타임 에러가 발생할 수 있는 함정이 여럿 있어서 약간은 악랄해 보인 것과, 큰 수 나눗셈 계산이 필요해서 언어 선택에 조금의 제한이 생기기는 했지만.">
+  
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="https://a.cyclic.dev/day20/">
+  
+  
+  <link rel="alternate" type="application/rss+xml" title="Splinters of Life" href="https://a.cyclic.dev/feed.xml">
+
+  
+
+  
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="kcy1019">
+  <meta name="twitter:title" content="Google Code Jam 2019 Qualification Round">
+  <meta name="twitter:description" content="이번 GCJ 퀄 라운드는 간단한 아이디어로 풀리는 문제가 많아서 재미있었다. 물론 C번은 런타임 에러가 발생할 수 있는 함정이 여럿 있어서 약간은 악랄해 보인 것과, 큰 수 나눗셈 계산이 필요해서 언어 선택에 조금의 제한이 생기기는 했지만.">
+  
+    <meta name="twitter:creator" content="kcy1019">
+  
+  
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css?family=Bitter:400,400i,700" rel="stylesheet">
+
+  
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      TeX: {
+        equationNumbers: {
+          autoNumber: "AMS"
+        }
+      },
+      tex2jax: {
+        inlineMath: [ ['$','$'] ],
+        displayMath: [ ['$$','$$'] ],
+        processEscapes: true,
+      }
+    });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">Splinters of Life</a>
+
+    <nav class="site-nav">
+      
+        
+        <a class="page-link" href="/archives/">Archives</a>
+      
+        
+        <a class="page-link" href="https://lucent.me">About</a>
+      
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    
+      <h1 class="post-title" itemprop="name headline">Google Code Jam 2019 Qualification Round</h1>
+    
+    <p class="post-meta"><time datetime="2019-04-07T02:33:30+00:00" itemprop="datePublished">Apr 7, 2019</time> •
+  
+    
+    
+      
+    
+      
+        <a href="/categories/ps/">ps</a>
+      
+    
+      
+    
+      
+    
+  
+
+
+
+</p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <p>이번 <a href="https://codingcompetitions.withgoogle.com/codejam/round/0000000000051705">GCJ 퀄 라운드</a>는 간단한 아이디어로 풀리는 문제가 많아서 재미있었다.
+물론 C번은 런타임 에러가 발생할 수 있는 함정이 여럿 있어서 약간은 악랄해 보인 것과,
+큰 수 나눗셈 계산이 필요해서 언어 선택에 조금의 제한이 생기기는 했지만.</p>
+
+<style type="text/css">
+    #markdown-toc { list-style-type: upper-alpha; }
+    #markdown-toc  ol { list-style-type: circle; }
+</style>
+
+<ol id="markdown-toc">
+  <li><a href="#foregone-solution" id="markdown-toc-foregone-solution">Foregone Solution</a></li>
+  <li><a href="#you-can-go-your-own-way" id="markdown-toc-you-can-go-your-own-way">You Can Go Your Own Way</a></li>
+  <li><a href="#cryptopangrams" id="markdown-toc-cryptopangrams">Cryptopangrams</a>    <ol>
+      <li><a href="#함정-팰린드롬" id="markdown-toc-함정-팰린드롬">함정: 팰린드롬</a></li>
+    </ol>
+  </li>
+  <li><a href="#dat-bae" id="markdown-toc-dat-bae">Dat Bae</a></li>
+</ol>
+
+<h2 id="foregone-solution"><a href="https://codingcompetitions.withgoogle.com/codejam/round/0000000000051705/0000000000088231">Foregone Solution</a></h2>
+
+<p>4가 한 개 이상 포함된 숫자 N을, 4를 포함하지 않는 두 양의 정수 X와 Y의 합으로 나타내는 문제,
+즉 <code class="highlighter-rouge">str(X).count('4') == 0 and str(Y).count('4') == 0 and X + Y == N</code>인 X, Y를 아무거나 찾으면 된다.
+따라서 풀이는 그냥 4가 나타나는 자리에만 2가 들어가도록 하면 끝!</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">T</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="k">for</span> <span class="n">C</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">'4'</span><span class="p">,</span> <span class="s">'2'</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="nb">int</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"Case #{}: {} {}"</span><span class="o">.</span><span class="nb">format</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">))</span></code></pre></figure>
+
+<h2 id="you-can-go-your-own-way"><a href="https://codingcompetitions.withgoogle.com/codejam/round/0000000000051705/00000000000881da">You Can Go Your Own Way</a></h2>
+
+<p>N by N 격자에서 오른쪽과 아래 쪽의 이동만 이용해서 왼쪽 위의 점부터 오른쪽 아래 점으로 이동하는 경로를 출력하는 문제이다.
+다만, 하나의 경로가 주어지고, 이 경로와 겹치는 이동이 있어서는 안 된다.
+이 문제의 풀이 역시도 정말 간단한데, 두 개의 이동 방법으로 끝 점까지 이동하기 위해서는 N-1 번의 아래 이동과 N-1번의 오른쪽 이동이 필요하다는 것을 이용해서, 주어진 이동 경로의 오른쪽과 아래 이동을 서로 바꾸면 항상 90도 회전한 경로로 이동하므로 겹치지 않고 이동할 수 있다.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">T</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="k">for</span> <span class="n">C</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(),</span> <span class="nb">input</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">'E'</span><span class="p">,</span><span class="s">'s'</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">'S'</span><span class="p">,</span><span class="s">'E'</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">'s'</span><span class="p">,</span><span class="s">'S'</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"Case #{}: {}"</span><span class="o">.</span><span class="nb">format</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">a</span><span class="p">))</span></code></pre></figure>
+
+<h2 id="cryptopangrams"><a href="https://codingcompetitions.withgoogle.com/codejam/round/0000000000051705/000000000008830b">Cryptopangrams</a></h2>
+
+<p>N 이하의 소수 중에서 26개를 뽑아 크기 순서대로 각 소수에 A, B, …, Z 를 대응시켰을 때,
+알파벳 대문자로 이루어진 팬그램<sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup> 문자열을 연속된 두 문자에 대응하는 소수의 곱으로 암호화 한 결과가 주어진다.
+N과 암호화된 정수의 리스트를 가지고 복호화 하는 문제이다.</p>
+
+<p>팬그램이기 때문에 풀이는 매우매우 간단하게 떠오르지만, 이번 라운드에서 가장 많은 함정을 가지고 있는 문제가 아니었을까 싶다.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ABCDEFGHIJKLMNOPQRSTUVWXYZ
+6 15 35 77 143 221 323 437 667 899 1147 1517 1763 2021 2491 3127 3599 4087 4757 5183 5767 6557 7387 8633 9797
+</code></pre></div></div>
+
+<p>첫 문자와 마지막 문자를 제외한 모든 문자는 암호문에서 두 번 등장하는 사실을 알 수 있다. 예를 들어 B는 6과 15에 모두 등장하므로, <code class="highlighter-rouge">gcd(6, 15)</code> 를 이용해 B에 해당하는 소수가 3임을 알 수 있다.
+같은 방법을 반복해서 모든 소수를 얻으면 끝!</p>
+
+<h3 id="함정-팰린드롬">함정: 팰린드롬</h3>
+
+<p>A와 B를 너무 쉽게 풀어서, 이것도 간단하겠지~ 하면서 막 내다가, 부끄럽게도.. 결국 테스트 데이터 생성기를 짜고 나서야 이 함정을 깨달았다.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ABACDEFGHIJKLMNOPQRSTUVWXYZ
+6 6 10 35 77 143 221 323 437 667 899 1147 1517 1763 2021 2491 3127 3599 4087 4757 5183 5767 6557 7387 8633 9797
+</code></pre></div></div>
+
+<p>실제로는 이렇게 암호문에 같은 수가 등장하는 경우도 고려해주어야 한다. (<code class="highlighter-rouge">ABA =&gt; 6 6</code>)</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">fractions</span> <span class="kn">import</span> <span class="n">gcd</span>
+<span class="k">def</span> <span class="nf">uniq</span><span class="p">(</span><span class="n">x</span><span class="p">):</span> <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">y</span><span class="p">:</span> <span class="n">y</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="p">))))</span>
+<span class="n">alphabet</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="s">'ABCDEFGHIJKLMNOPQRSTUVWXYZ'</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">decrypt</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="n">s</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span> <span class="n">a</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">//</span> <span class="n">a</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">return</span> <span class="s">""</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">d</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="p">[</span><span class="n">c</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">//</span> <span class="n">a</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]])])</span>
+
+<span class="n">T</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="k">for</span> <span class="n">C</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">strip</span><span class="p">()),</span> <span class="nb">input</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">strip</span><span class="p">()),</span> <span class="nb">input</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()))</span>
+
+    <span class="n">g</span> <span class="o">=</span> <span class="n">uniq</span><span class="p">(</span><span class="nb">sum</span><span class="p">([[</span><span class="n">gcd</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">x</span> <span class="k">if</span> <span class="n">gcd</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">a</span> <span class="o">!=</span> <span class="n">b</span><span class="p">]</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">x</span><span class="p">],</span> <span class="p">[]))</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">uniq</span><span class="p">(</span><span class="nb">sum</span><span class="p">([[</span><span class="n">a</span> <span class="o">//</span> <span class="n">b</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">g</span> <span class="k">if</span> <span class="n">a</span> <span class="o">%</span> <span class="n">b</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">x</span><span class="p">],</span> <span class="n">g</span><span class="p">))</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="n">p</span><span class="p">:</span> <span class="n">q</span> <span class="k">for</span> <span class="n">q</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">alphabet</span><span class="p">,</span> <span class="n">g</span><span class="p">)}</span>
+
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">p</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">%</span> <span class="n">p</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="n">g</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">"Case #{}: {}"</span><span class="o">.</span><span class="nb">format</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">decrypt</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">p</span><span class="p">)))</span>
+            <span class="k">break</span>
+        <span class="k">except</span><span class="p">:</span> <span class="k">pass</span></code></pre></figure>
+
+<h2 id="dat-bae"><a href="https://codingcompetitions.withgoogle.com/codejam/round/0000000000051705/00000000000881de">Dat Bae</a></h2>
+
+<p>정해와는 조금 다르게, BFS와 비슷한 방법으로 해결했다.
+간단하게 스몰(Test Set 1) 문제를 다음과 같은 트리 형태로 나타내어 보자.</p>
+
+<p><img src="/images/datbae.png" style="max-width:350px" /></p>
+
+<p>노드의 개수가 최대 1024개이므로, 트리의 높이는 10이 되고,
+각 높이 별로 쿼리를 한 번씩 하면 어느 칸이 고장인지 간단히 알 수 있다.
+각각의 노드에서 구간을 두 개로 쪼갤 때,
+왼쪽 절반에는 <code class="highlighter-rouge">1</code>, 오른쪽 절반에는 <code class="highlighter-rouge">0</code>을 부여하면
+쿼리 결과의 1과 0의 개수를 세어 각 구간에 고장난 머신이 몇 개 존재하는지 알 수 있다.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">sys</span> <span class="kn">import</span> <span class="n">stdout</span>
+
+<span class="k">def</span> <span class="nf">send</span><span class="p">(</span><span class="n">q</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">""</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">q</span><span class="p">]),</span> <span class="n">flush</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span> <span class="ow">and</span> <span class="n">res</span> <span class="o">==</span> <span class="s">"-1"</span><span class="p">:</span> <span class="nb">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">res</span>
+
+<span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="n">q</span><span class="p">,</span> <span class="n">ans</span><span class="p">,</span> <span class="n">qcnt</span> <span class="o">=</span> <span class="p">[[</span><span class="n">p</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="bp">True</span><span class="p">]],</span> <span class="p">[],</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">q</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">qcnt</span> <span class="o">&lt;=</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">query</span><span class="p">,</span> <span class="n">nq</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">n</span><span class="p">,</span> <span class="p">[]</span>
+        <span class="n">stop</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="k">for</span> <span class="n">rng</span> <span class="ow">in</span> <span class="n">q</span><span class="p">:</span>
+            <span class="n">p</span><span class="p">,</span> <span class="n">ln</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">use</span> <span class="o">=</span> <span class="n">rng</span>
+            <span class="k">if</span> <span class="n">b</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">ln</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">continue</span>
+
+            <span class="k">if</span> <span class="n">b</span> <span class="o">==</span> <span class="n">ln</span><span class="p">:</span>
+                <span class="n">nq</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">p</span><span class="p">,</span> <span class="n">ln</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="bp">False</span><span class="p">])</span>
+                <span class="k">if</span> <span class="n">use</span><span class="p">:</span>
+                    <span class="n">ans</span> <span class="o">+=</span> <span class="p">[</span><span class="n">p</span> <span class="o">+</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ln</span><span class="p">)]</span>
+                <span class="k">continue</span>
+
+            <span class="n">m</span> <span class="o">=</span> <span class="n">ln</span> <span class="o">//</span> <span class="mi">2</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span> <span class="n">query</span><span class="p">[</span><span class="n">p</span><span class="o">+</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ln</span><span class="o">-</span><span class="n">m</span><span class="p">):</span> <span class="n">query</span><span class="p">[</span><span class="n">p</span><span class="o">+</span><span class="n">m</span><span class="o">+</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">nq</span> <span class="o">+=</span> <span class="p">[[</span><span class="n">p</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">True</span><span class="p">],</span> <span class="p">[</span><span class="n">p</span> <span class="o">+</span> <span class="n">m</span><span class="p">,</span> <span class="n">ln</span> <span class="o">-</span> <span class="n">m</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">True</span><span class="p">]]</span>
+            <span class="n">stop</span> <span class="o">=</span> <span class="bp">False</span>
+
+        <span class="k">if</span> <span class="n">stop</span> <span class="ow">or</span> <span class="n">qcnt</span> <span class="o">&gt;=</span> <span class="n">f</span><span class="p">:</span> <span class="k">break</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">send</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+        <span class="n">qcnt</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="n">faults</span><span class="p">,</span> <span class="n">nptr</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">q</span><span class="p">)):</span>
+            <span class="n">p</span><span class="p">,</span> <span class="n">ln</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">b</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">ln</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">continue</span>
+
+            <span class="k">if</span> <span class="n">b</span> <span class="o">==</span> <span class="n">ln</span><span class="p">:</span>
+                <span class="n">nptr</span><span class="p">,</span> <span class="n">faults</span> <span class="o">=</span> <span class="n">nptr</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">faults</span> <span class="o">+</span> <span class="n">b</span>
+                <span class="k">continue</span>
+
+            <span class="n">r</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="n">p</span> <span class="o">-</span> <span class="n">faults</span><span class="p">:</span><span class="n">p</span> <span class="o">-</span> <span class="n">faults</span> <span class="o">+</span> <span class="n">ln</span> <span class="o">-</span> <span class="n">b</span><span class="p">]</span>
+            <span class="n">m</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">ln</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span> <span class="nb">sum</span><span class="p">([</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">r</span><span class="p">])</span>
+            <span class="n">nq</span><span class="p">[</span><span class="n">nptr</span><span class="o">+</span><span class="mi">0</span><span class="p">][</span><span class="o">-</span><span class="mi">2</span><span class="p">],</span> <span class="n">nq</span><span class="p">[</span><span class="n">nptr</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">m</span> <span class="o">-</span> <span class="n">v</span><span class="p">,</span> <span class="n">b</span> <span class="o">-</span> <span class="p">(</span><span class="n">m</span> <span class="o">-</span> <span class="n">v</span><span class="p">)</span>
+            <span class="n">nptr</span><span class="p">,</span> <span class="n">faults</span> <span class="o">=</span> <span class="n">nptr</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="n">faults</span> <span class="o">+</span> <span class="n">b</span>
+        <span class="n">q</span> <span class="o">=</span> <span class="n">nq</span>
+
+    <span class="k">return</span> <span class="s">" "</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">ans</span><span class="p">)])</span>
+
+
+<span class="n">T</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+<span class="k">for</span> <span class="n">C</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">T</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="n">n</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">f</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">strip</span><span class="p">()),</span> <span class="nb">input</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span> <span class="nb">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="nb">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span></code></pre></figure>
+
+<p>Test Set 2 (<code class="highlighter-rouge">F = 5</code>) 일 때에는 어떻게 하면 될까?
+기존과 같이 트리의 각 레벨 별로 한 번씩 쿼리를 하되,
+가능할 경우 구간을 2개보다 잘게 나누어서 높이를 줄이면 된다.</p>
+
+<p>중요한 아이디어는, 구간을 쪼갰을 때 아무리 많이 고장나도 구간 하나가 통째로 지워지지 않을 만큼만 쪼개면 (<code class="highlighter-rouge">(length - 1) // broken</code>) 기존과 같이 쉽게 처리할 수 있다는 것이다.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">sys</span> <span class="kn">import</span> <span class="n">stdout</span>
+
+<span class="k">def</span> <span class="nf">send</span><span class="p">(</span><span class="n">q</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">""</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">q</span><span class="p">]),</span> <span class="n">flush</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span> <span class="ow">and</span> <span class="n">res</span> <span class="o">==</span> <span class="s">"-1"</span><span class="p">:</span> <span class="nb">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">res</span>
+
+
+<span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="n">q</span><span class="p">,</span> <span class="n">ans</span><span class="p">,</span> <span class="n">qcnt</span> <span class="o">=</span> <span class="p">[[</span><span class="n">p</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="bp">True</span><span class="p">]],</span> <span class="p">[],</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">q</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">qcnt</span> <span class="o">&lt;=</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">query</span><span class="p">,</span> <span class="n">nq</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">n</span><span class="p">,</span> <span class="p">[]</span>
+        <span class="n">stop</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="k">for</span> <span class="n">rng</span> <span class="ow">in</span> <span class="n">q</span><span class="p">:</span>
+            <span class="n">p</span><span class="p">,</span> <span class="n">ln</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">use</span> <span class="o">=</span> <span class="n">rng</span>
+            <span class="k">if</span> <span class="n">b</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">ln</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">continue</span>
+
+            <span class="k">if</span> <span class="n">b</span> <span class="o">==</span> <span class="n">ln</span><span class="p">:</span>
+                <span class="n">nq</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">p</span><span class="p">,</span> <span class="n">ln</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="bp">False</span><span class="p">])</span>
+                <span class="k">if</span> <span class="n">use</span><span class="p">:</span>
+                    <span class="n">ans</span> <span class="o">+=</span> <span class="p">[</span><span class="n">p</span> <span class="o">+</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ln</span><span class="p">)]</span>
+                <span class="k">continue</span>
+
+            <span class="n">stop</span> <span class="o">=</span> <span class="bp">False</span>
+
+            <span class="k">if</span> <span class="mi">3</span> <span class="o">&lt;</span> <span class="p">(</span><span class="n">ln</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="n">b</span><span class="p">:</span>
+                <span class="n">k</span> <span class="o">=</span> <span class="p">(</span><span class="n">ln</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="n">b</span>
+                <span class="n">pp</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="n">p</span><span class="p">,</span> <span class="n">ln</span> <span class="o">//</span> <span class="n">k</span>
+
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+                    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span> <span class="n">query</span><span class="p">[</span><span class="n">pp</span><span class="o">+</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span>
+                    <span class="n">nq</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">pp</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">True</span><span class="p">])</span>
+                    <span class="n">pp</span> <span class="o">+=</span> <span class="n">m</span>
+
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ln</span> <span class="o">-</span> <span class="n">m</span> <span class="o">*</span> <span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">)):</span> <span class="n">query</span><span class="p">[</span><span class="n">pp</span><span class="o">+</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">k</span> <span class="o">%</span> <span class="mi">2</span>
+                <span class="n">nq</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">pp</span><span class="p">,</span> <span class="n">ln</span> <span class="o">-</span> <span class="n">m</span> <span class="o">*</span> <span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">True</span><span class="p">])</span>
+                <span class="k">continue</span>
+
+
+            <span class="n">pp</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="n">p</span><span class="p">,</span> <span class="n">ln</span> <span class="o">//</span> <span class="mi">2</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span> <span class="n">query</span><span class="p">[</span><span class="n">pp</span><span class="o">+</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="n">nq</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">pp</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">True</span><span class="p">])</span>
+
+            <span class="n">pp</span> <span class="o">+=</span> <span class="n">m</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ln</span> <span class="o">-</span> <span class="n">m</span><span class="p">):</span> <span class="n">query</span><span class="p">[</span><span class="n">pp</span><span class="o">+</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">nq</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">pp</span><span class="p">,</span> <span class="n">ln</span> <span class="o">-</span> <span class="n">m</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">True</span><span class="p">])</span>
+
+
+        <span class="k">if</span> <span class="n">stop</span> <span class="ow">or</span> <span class="n">qcnt</span> <span class="o">&gt;=</span> <span class="n">f</span><span class="p">:</span> <span class="k">break</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">send</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+        <span class="n">qcnt</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="n">faults</span><span class="p">,</span> <span class="n">nptr</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">q</span><span class="p">)):</span>
+            <span class="n">p</span><span class="p">,</span> <span class="n">ln</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">b</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">ln</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">continue</span>
+
+            <span class="k">if</span> <span class="n">b</span> <span class="o">==</span> <span class="n">ln</span><span class="p">:</span>
+                <span class="n">nptr</span><span class="p">,</span> <span class="n">faults</span> <span class="o">=</span> <span class="n">nptr</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">faults</span> <span class="o">+</span> <span class="n">b</span>
+                <span class="k">continue</span>
+
+            <span class="n">r</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="n">p</span> <span class="o">-</span> <span class="n">faults</span><span class="p">:</span><span class="n">p</span> <span class="o">-</span> <span class="n">faults</span> <span class="o">+</span> <span class="n">ln</span> <span class="o">-</span> <span class="n">b</span><span class="p">]</span>
+
+            <span class="k">if</span> <span class="mi">3</span> <span class="o">&lt;</span> <span class="p">(</span><span class="n">ln</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="n">b</span><span class="p">:</span>
+                <span class="n">k</span> <span class="o">=</span> <span class="p">(</span><span class="n">ln</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="n">b</span>
+                <span class="n">anti</span> <span class="o">=</span> <span class="s">"</span><span class="si">%</span><span class="s">d"</span> <span class="o">%</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">k</span> <span class="o">%</span> <span class="mi">2</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">r</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">anti</span><span class="p">:</span> <span class="n">r</span> <span class="o">=</span> <span class="n">r</span><span class="p">[:</span><span class="n">r</span><span class="o">.</span><span class="n">rfind</span><span class="p">(</span><span class="n">anti</span><span class="p">)]</span>
+                <span class="n">pp</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">ln</span> <span class="o">//</span> <span class="n">k</span>
+
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+                    <span class="n">u</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="n">pp</span><span class="p">:</span><span class="n">pp</span><span class="o">+</span><span class="n">m</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">!=</span> <span class="p">(</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span><span class="p">:</span> <span class="n">u</span> <span class="o">=</span> <span class="n">u</span><span class="p">[:</span><span class="n">u</span><span class="o">.</span><span class="n">rfind</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span><span class="p">))]</span>
+                    <span class="n">fv</span> <span class="o">=</span> <span class="n">m</span> <span class="o">-</span> <span class="nb">sum</span><span class="p">([(</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">u</span><span class="p">])</span>
+                    <span class="n">nq</span><span class="p">[</span><span class="n">nptr</span><span class="p">][</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">fv</span>
+                    <span class="n">nptr</span><span class="p">,</span> <span class="n">faults</span> <span class="o">=</span> <span class="n">nptr</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">faults</span> <span class="o">+</span> <span class="n">fv</span>
+                    <span class="n">pp</span> <span class="o">+=</span> <span class="n">m</span> <span class="o">-</span> <span class="n">fv</span>
+
+                <span class="n">u</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="n">pp</span><span class="p">:</span><span class="n">pp</span><span class="o">+</span><span class="n">ln</span><span class="o">-</span><span class="n">m</span><span class="o">*</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">)]</span>
+                <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">!=</span> <span class="n">k</span> <span class="o">%</span> <span class="mi">2</span><span class="p">:</span> <span class="n">u</span> <span class="o">=</span> <span class="n">u</span><span class="p">[:</span><span class="n">u</span><span class="o">.</span><span class="n">rfind</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">k</span> <span class="o">%</span> <span class="mi">2</span><span class="p">))]</span>
+                <span class="n">fv</span> <span class="o">=</span> <span class="p">(</span><span class="n">ln</span> <span class="o">-</span> <span class="n">m</span> <span class="o">*</span> <span class="p">(</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">-</span> <span class="nb">sum</span><span class="p">([</span><span class="n">k</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">u</span><span class="p">])</span>
+                <span class="n">nq</span><span class="p">[</span><span class="n">nptr</span><span class="p">][</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">fv</span>
+                <span class="n">nptr</span><span class="p">,</span> <span class="n">faults</span> <span class="o">=</span> <span class="n">nptr</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">faults</span> <span class="o">+</span> <span class="n">fv</span>
+                <span class="k">continue</span>
+
+            <span class="n">m</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">ln</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span> <span class="nb">sum</span><span class="p">([</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">r</span><span class="p">])</span>
+            <span class="n">nq</span><span class="p">[</span><span class="n">nptr</span><span class="o">+</span><span class="mi">0</span><span class="p">][</span><span class="o">-</span><span class="mi">2</span><span class="p">],</span> <span class="n">nq</span><span class="p">[</span><span class="n">nptr</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">m</span> <span class="o">-</span> <span class="n">v</span><span class="p">,</span> <span class="n">b</span> <span class="o">-</span> <span class="p">(</span><span class="n">m</span> <span class="o">-</span> <span class="n">v</span><span class="p">)</span>
+            <span class="n">nptr</span><span class="p">,</span> <span class="n">faults</span> <span class="o">=</span> <span class="n">nptr</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="n">faults</span> <span class="o">+</span> <span class="n">b</span>
+
+        <span class="n">q</span> <span class="o">=</span> <span class="n">nq</span>
+
+    <span class="k">return</span> <span class="s">" "</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">ans</span><span class="p">)])</span>
+
+
+<span class="n">T</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+<span class="k">for</span> <span class="n">C</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">T</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="n">n</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">f</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">strip</span><span class="p">()),</span> <span class="nb">input</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span> <span class="nb">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="nb">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span></code></pre></figure>
+
+<p>사실 이건 문제의 난이도 보다는 인터랙티브 문제라 테스트가 매끄럽지 않아서 조금 힘들었다.</p>
+
+<div class="footnotes">
+  <ol>
+    <li id="fn:1">
+      <p><a href="https://en.wikipedia.org/wiki/Pangram">Pangram</a>: 모든 알파벳이 한 번 이상 등장하는 문자열 <a href="#fnref:1" class="reversefootnote">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  </div>
+
+  
+
+</article>
+
+      </div>
+    </main>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <p>
+      
+
+&copy;  - Powered by <a href="https://jekyllrb.com">Jekyll</a> &amp; <a href="https://github.com/yous/whiteglass">whiteglass</a> - Subscribe via <a href="https://a.cyclic.dev/feed.xml">RSS</a>
+
+    </p>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>
