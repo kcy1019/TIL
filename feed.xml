@@ -5,7 +5,7 @@
   
   <link href="https://a.cyclic.dev/feed.xml" rel="self" type="application/atom+xml" />
   <link href="https://a.cyclic.dev/" rel="alternate" type="text/html" />
-  <updated>2019-04-08T04:06:18+00:00</updated>
+  <updated>2019-04-08T15:39:38+00:00</updated>
   <id>https://a.cyclic.dev//</id>
 
   
@@ -46,7 +46,6 @@
       &lt;li&gt;&lt;a href=&quot;#함정-팰린드롬&quot; id=&quot;markdown-toc-함정-팰린드롬&quot;&gt;함정: 팰린드롬&lt;/a&gt;&lt;/li&gt;
     &lt;/ol&gt;
   &lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#dat-bae&quot; id=&quot;markdown-toc-dat-bae&quot;&gt;Dat Bae&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;h2 id=&quot;foregone-solution&quot;&gt;&lt;a href=&quot;https://codingcompetitions.withgoogle.com/codejam/round/0000000000051705/0000000000088231&quot;&gt;Foregone Solution&lt;/a&gt;&lt;/h2&gt;
@@ -123,23 +122,21 @@ N과 암호화된 정수의 리스트를 가지고 복호화 하는 문제이다
             &lt;span class=&quot;k&quot;&gt;break&lt;/span&gt;
         &lt;span class=&quot;k&quot;&gt;except&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;pass&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;p&gt;#_&lt;/p&gt;
-&lt;h2 id=&quot;dat-bae&quot;&gt;&lt;a href=&quot;https://codingcompetitions.withgoogle.com/codejam/round/0000000000051705/00000000000881de&quot;&gt;Dat Bae&lt;/a&gt;&lt;/h2&gt;
-
 &lt;p&gt;1과 0으로 이루어진 길이 N의 메시지를 보내면 각 컴퓨터가 차례로 자신이 받은 값을 그대로 응답으로 돌려주는 시스템이 있다.
 다만 N 대의 컴퓨터 중 B 대가 고장나서 응답을 주지 않는 상태일 때(즉 요청의 길이는 N이지만 응답의 길이는 N - B이다),
 최대 F번의 쿼리를 이용해 고장난 B개 컴퓨터의 번호를 찾는 문제이다.&lt;/p&gt;
 
 &lt;p&gt;정해와는 조금 다르게, BFS와 비슷한 방법으로 해결했다.
-간단하게 스몰(Test Set 1) 문제를 다음과 같은 트리 형태로 나타내어 보자.&lt;/p&gt;
+간단하게 스몰(Test Set 1) 문제를 다음과 같은 트리 형태로 나타내어 보자.
+([구간 시작, 구간 끝], 구간 내 고장난 머신의 개수)&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/datbae.png&quot; style=&quot;max-width:350px&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/datbae.svg&quot; style=&quot;max-height:500px&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;노드의 개수가 최대 1024개이므로, 트리의 높이는 10이 되고,
+&lt;p&gt;노드의 개수가 최대 1024개이므로 트리의 높이는 10이 되고,
 각 높이 별로 쿼리를 한 번씩 하면 어느 칸이 고장인지 간단히 알 수 있다.
 각각의 노드에서 구간을 두 개로 쪼갤 때,
 왼쪽 절반에는 &lt;code class=&quot;highlighter-rouge&quot;&gt;1&lt;/code&gt;, 오른쪽 절반에는 &lt;code class=&quot;highlighter-rouge&quot;&gt;0&lt;/code&gt;을 부여하면
-쿼리 결과의 1과 0의 개수를 세어 각 구간에 고장난 머신이 몇 개 존재하는지 알 수 있다.&lt;/p&gt;
+위의 그림처럼 쿼리 결과의 1과 0의 개수를 세어 각 구간에 고장난 머신이 몇 개 존재하는지 알 수 있다.&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;sys&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stdout&lt;/span&gt;
 
@@ -205,7 +202,7 @@ N과 암호화된 정수의 리스트를 가지고 복호화 하는 문제이다
 기존과 같이 트리의 각 레벨 별로 한 번씩 쿼리를 하되,
 가능할 경우 구간을 2개보다 잘게 나누어서 높이를 줄이면 된다.&lt;/p&gt;
 
-&lt;p&gt;중요한 아이디어는, 구간을 쪼갰을 때 아무리 많이 고장나도 구간 하나가 통째로 지워지지 않을 만큼만 쪼개면 (&lt;code class=&quot;highlighter-rouge&quot;&gt;(length - 1) // broken&lt;/code&gt;) 앞서 살펴본, 구간을 2개로 나눈느 방법과 거의 똑같이 처리할 수 있다는 것이다.&lt;/p&gt;
+&lt;p&gt;중요한 아이디어는, 구간을 쪼갰을 때 아무리 많이 고장나도 구간 하나가 통째로 지워지지 않을 만큼만 쪼개면 (&lt;code class=&quot;highlighter-rouge&quot;&gt;(length - 1) // broken&lt;/code&gt;) 앞서 살펴본, 구간을 2개로 나누는 방법과 거의 똑같이 처리할 수 있다는 것이다.&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;sys&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stdout&lt;/span&gt;
 
