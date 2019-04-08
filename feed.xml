@@ -5,7 +5,7 @@
   
   <link href="https://a.cyclic.dev/feed.xml" rel="self" type="application/atom+xml" />
   <link href="https://a.cyclic.dev/" rel="alternate" type="text/html" />
-  <updated>2019-04-08T15:39:38+00:00</updated>
+  <updated>2019-04-08T15:41:53+00:00</updated>
   <id>https://a.cyclic.dev//</id>
 
   
@@ -46,6 +46,7 @@
       &lt;li&gt;&lt;a href=&quot;#함정-팰린드롬&quot; id=&quot;markdown-toc-함정-팰린드롬&quot;&gt;함정: 팰린드롬&lt;/a&gt;&lt;/li&gt;
     &lt;/ol&gt;
   &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#dat-bae&quot; id=&quot;markdown-toc-dat-bae&quot;&gt;Dat Bae&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;h2 id=&quot;foregone-solution&quot;&gt;&lt;a href=&quot;https://codingcompetitions.withgoogle.com/codejam/round/0000000000051705/0000000000088231&quot;&gt;Foregone Solution&lt;/a&gt;&lt;/h2&gt;
@@ -121,6 +122,8 @@ N과 암호화된 정수의 리스트를 가지고 복호화 하는 문제이다
             &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Case #{}: {}&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;C&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;decrypt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
             &lt;span class=&quot;k&quot;&gt;break&lt;/span&gt;
         &lt;span class=&quot;k&quot;&gt;except&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;pass&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;dat-bae&quot;&gt;&lt;a href=&quot;https://codingcompetitions.withgoogle.com/codejam/round/0000000000051705/00000000000881de&quot;&gt;Dat Bae&lt;/a&gt;&lt;/h2&gt;
 
 &lt;p&gt;1과 0으로 이루어진 길이 N의 메시지를 보내면 각 컴퓨터가 차례로 자신이 받은 값을 그대로 응답으로 돌려주는 시스템이 있다.
 다만 N 대의 컴퓨터 중 B 대가 고장나서 응답을 주지 않는 상태일 때(즉 요청의 길이는 N이지만 응답의 길이는 N - B이다),
