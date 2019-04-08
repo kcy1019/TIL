@@ -200,7 +200,12 @@ N과 암호화된 정수의 리스트를 가지고 복호화 하는 문제이다
             <span class="k">break</span>
         <span class="k">except</span><span class="p">:</span> <span class="k">pass</span></code></pre></figure>
 
+<p>#_</p>
 <h2 id="dat-bae"><a href="https://codingcompetitions.withgoogle.com/codejam/round/0000000000051705/00000000000881de">Dat Bae</a></h2>
+
+<p>1과 0으로 이루어진 길이 N의 메시지를 보내면 각 컴퓨터가 차례로 자신이 받은 값을 그대로 응답으로 돌려주는 시스템이 있다.
+다만 N 대의 컴퓨터 중 B 대가 고장나서 응답을 주지 않는 상태일 때(즉 요청의 길이는 N이지만 응답의 길이는 N - B이다),
+최대 F번의 쿼리를 이용해 고장난 B개 컴퓨터의 번호를 찾는 문제이다.</p>
 
 <p>정해와는 조금 다르게, BFS와 비슷한 방법으로 해결했다.
 간단하게 스몰(Test Set 1) 문제를 다음과 같은 트리 형태로 나타내어 보자.</p>
@@ -277,7 +282,7 @@ N과 암호화된 정수의 리스트를 가지고 복호화 하는 문제이다
 기존과 같이 트리의 각 레벨 별로 한 번씩 쿼리를 하되,
 가능할 경우 구간을 2개보다 잘게 나누어서 높이를 줄이면 된다.</p>
 
-<p>중요한 아이디어는, 구간을 쪼갰을 때 아무리 많이 고장나도 구간 하나가 통째로 지워지지 않을 만큼만 쪼개면 (<code class="highlighter-rouge">(length - 1) // broken</code>) 기존과 같이 쉽게 처리할 수 있다는 것이다.</p>
+<p>중요한 아이디어는, 구간을 쪼갰을 때 아무리 많이 고장나도 구간 하나가 통째로 지워지지 않을 만큼만 쪼개면 (<code class="highlighter-rouge">(length - 1) // broken</code>) 앞서 살펴본, 구간을 2개로 나눈느 방법과 거의 똑같이 처리할 수 있다는 것이다.</p>
 
 <figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">sys</span> <span class="kn">import</span> <span class="n">stdout</span>
 
