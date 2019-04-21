@@ -125,21 +125,21 @@
 
 <p>Let’s Encrypt에서 발급받은 인증서를 이용하는 사이트에 접속하면 다음과 같은 인증서 정보를 볼 수 있다.</p>
 
-<p><img src="/images/ee-cert.png" style="max-width:400px;display:block" id="end-entity-cert" /></p>
+<p><img src="/images/ee-cert.png" style="max-width:400px;display:block;margin:0 auto 0 auto" id="end-entity-cert" /></p>
 
 <p>인증서가 3단계로 계층 형태를 갖는데, 각각이 무엇인지 아래 그림과 함께 살펴보자.</p>
 
-<p><img src="/images/Chain_of_trust.svg" style="max-width:400px;display:block" /></p>
+<p><img src="/images/Chain_of_trust.svg" style="max-width:400px;display:block;margin:0 auto 0 auto" /></p>
 
 <p>우선 End-entity Certificate이 바로 아까 본 그림의 <code class="highlighter-rouge">a.cyclic.dev</code> 인증서에 해당한다.
 이 인증서에는 <code class="highlighter-rouge">Let's Encrypt Authority X3</code>에 의해 발급되었고, RSA로 서명 받았음이 기재되어 있다.
 기재된 정보를 따라가면 Intermediate Certificate를 만날 수 있다.</p>
 
-<p><img src="/images/it-cert.png" style="max-width:400px;display:block" /></p>
+<p><img src="/images/it-cert.png" style="max-width:400px;display:block;margin:0 auto 0 auto" /></p>
 
 <p>Intermediate Certificate은 다시 Root CA인 DST Root CA X3에 의해 발급된 것이라고 한다.</p>
 
-<p><img src="/images/rt-cert.png" style="max-width:400px;display:block" /></p>
+<p><img src="/images/rt-cert.png" style="max-width:400px;display:block;margin:0 auto 0 auto" /></p>
 
 <p>이번엔 스스로 발급한(self-signed) Root CA의 인증서가 나온다.</p>
 
@@ -149,7 +149,7 @@
 <p>Let’s Encrypt의 (현재) 인증서를 따라가면 나오는 Root CA인
 DST Root CA는 <a href="https://en.wikipedia.org/wiki/IdenTrust">IdenTrust</a>에서 관리하는데, 역사가 길어 대부분의 기기(OS,브라우저,…)가 해당 Root CA 인증서를 신뢰한다.</p>
 
-<p><img src="/images/isrg-cert.png" style="max-width:400px;display:block" /></p>
+<p><img src="/images/isrg-cert.png" style="max-width:400px;display:block;margin:0 auto 0 auto" /></p>
 
 <p>한편, 7월부터는 Let’s Encrypt를 운영하는 <a href="https://letsencrypt.org/2019/04/15/transitioning-to-isrg-root.html">ISRG(Ineternet Security Research Group) Root CA</a>에서 발급한 인증서를
 이용하는 것을 <a href="https://valid-isrgrootx1.letsencrypt.org/">테스트 사이트</a>에서 확인할 수 있다.</p>
@@ -160,14 +160,13 @@ DST Root CA는 <a href="https://en.wikipedia.org/wiki/IdenTrust">IdenTrust</a>�
 <a href="#end-entity-cert">처음에 살펴본 DST 인증서 체인</a>에도 같은 CA의 인증서가 있었다.</p>
 
 <p>이는 Let’s Encrypt Authority X3가 Cross Signing을 받은 CA이기 때문이다.
-즉 두 Root CA, DST Root CA X3과 ISRG Root X1에게 인증을 받은 CA란 것이다.</p>
+즉 두 Root CA, DST Root CA X3와 ISRG Root X1에게 인증을 받은 CA란 것이다.</p>
 
 <p>CA라는 것은 사실 결국 RSA 공개키와 비밀키의 쌍이고,
 인증서는 비밀키로 서명된 데이터와 공개키로 이루어진 것인데,
 CA가 하나라는 말은 키 쌍이 하나라는 뜻이고(중요),
-두 곳에서 인증을 받았단 것은 인증서는 둘이라는 뜻이다(중요).</p>
-
-<p>즉, 우리의 End-Entity Certificate은 그 하나의 키(Let’s Encrypt Authority X3)로 서명된 것이므로,
+두 곳에서 인증을 받았단 것은 인증서는 둘이라는 뜻이다(중요).
+즉, 우리의 End-Entity Certificate은 그 하나의 키(Let’s Encrypt Authority X3)로 서명된 것이므로,
 위의 두 인증서(DST Root CA X3, ISRG Root X1) 둘 중 어느 쪽을 이용해도 인증이 유효하다(매우 중요).</p>
 
 <p>따라서, Intermediate Certificate이 만료되기 전까지는
@@ -176,7 +175,7 @@ ISRG Root X1의 인증서 대신 서버에 적용함으로써 오래 된 유저�
 
 <h2 id="그래서-방법은">그래서 방법은?</h2>
 
-<p><a href="https://certbot.eff.org/">Certbot</a>을 이용해서 인증서를 발급받으면 <code class="highlighter-rouge">fullchain.pem</code>이 생성되고, 보통 이를 이용하게 된다.
+<p><a href="https://certbot.eff.org/">Certbot</a>을 이용해서 인증서를 발급받으면 <code class="highlighter-rouge">fullchain.pem</code>이 생성되고, TLS 스펙을 따르는 서버는 보통 이 파일을 이용한다.
 여기엔 두 개의 인증서 정보가 들어있는데, 위의 것이 End-Entity Certificate, 아래의 것이 Intermediate Certificate 이다.</p>
 
 <p>직접 ISRG의 것과 DST의 것을 바꿔보며 테스트 해 보면 가장 확실한데,
@@ -185,7 +184,7 @@ ISRG의 Intermediate Certificate은 아까의 테스트 사이트에 접속해�
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>openssl s_client <span class="nt">-showcerts</span> <span class="nt">-connect</span> valid-isrgrootx1.letsencrypt.org:443 <span class="nt">-servername</span> valid-isrgrootx1.letsencrypt.org
 </code></pre></div></div>
 
-<p><img src="/images/isrg-cert-raw.png" style="max-width:400px;display:block" /></p>
+<p><img src="/images/isrg-cert-raw.png" style="max-width:400px;display:block;margin:0 auto 0 auto" /></p>
 
 
   </div>
