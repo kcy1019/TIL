@@ -61,6 +61,10 @@
 <lastmod>2019-04-21T02:33:30+00:00</lastmod>
 </url>
 <url>
+<loc>https://a.cyclic.dev/day42/</loc>
+<lastmod>2019-04-29T12:55:30+00:00</lastmod>
+</url>
+<url>
 <loc>https://a.cyclic.dev/404/</loc>
 </url>
 <url>
@@ -86,5 +90,8 @@
 </url>
 <url>
 <loc>https://a.cyclic.dev/posts/3/</loc>
+</url>
+<url>
+<loc>https://a.cyclic.dev/posts/4/</loc>
 </url>
 </urlset>
