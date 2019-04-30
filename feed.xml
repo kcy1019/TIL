@@ -5,7 +5,7 @@
   
   <link href="https://a.cyclic.dev/feed.xml" rel="self" type="application/atom+xml" />
   <link href="https://a.cyclic.dev/" rel="alternate" type="text/html" />
-  <updated>2019-04-29T15:09:46+00:00</updated>
+  <updated>2019-04-30T12:15:47+00:00</updated>
   <id>https://a.cyclic.dev//</id>
 
   
@@ -126,7 +126,7 @@ $i$번째 날이 될 때마다, $i|j$, 즉 $i$의 약수인 $j$번째 링이 두
 &lt;script type=&quot;math/tex&quot;&gt;Q(210) = r_1 \cdot 2^{210} + r_2 \cdot 2^{105} + r_3 \cdot 2^{70} + r_4 \cdot 2^{52} + r_5 \cdot 2^{42} + r_6 \cdot 2^{35} \mathrm{~mod~} 2^{63} \\
 Q(210) = r_4 \cdot 2^{52} + r_5 \cdot 2^{42} + r_6 \cdot 2^{35}&lt;/script&gt;&lt;/p&gt;
 
-&lt;p&gt;지수를 살펴보면 각각의 차이가 7보다 크기 때문에 합으로부터 $r_4, r_5, r_6$을 얻어낼 수 있다.&lt;/p&gt;
+&lt;p&gt;지수를 살펴보면 각각의 차이가 7 이상이기 때문에 합으로부터 $r_4, r_5, r_6$을 얻어낼 수 있다.&lt;/p&gt;
 
 &lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
 \begin{cases}
@@ -165,7 +165,50 @@ r_1 &amp; = &amp; (Q(42) - r_4 \cdot 2^{10} - r_5 \cdot 2^{8} - r_6 \cdot 2^{7})
 
 &lt;h2 id=&quot;fair-fight&quot;&gt;&lt;a href=&quot;https://codingcompetitions.withgoogle.com/codejam/round/0000000000051706/0000000000122838&quot;&gt;Fair Fight&lt;/a&gt;&lt;/h2&gt;
 
-&lt;p&gt;이건 졸려서 내일..&lt;/p&gt;
+&lt;p&gt;N(1≤N≤100,000)종류의 검이 각각 여러 자루씩 존재하고,
+각 종류별로 찰스와 데릴라가 각각의 검을 선택했을 때의 공격력이 주어진다.
+찰스와 데릴라는 각각 자신의 공격력이 최대가 되는 검을 선택한다고 할 때,
+선택할 수 있는 검의 종류를 $[L, R]$ 구간으로 제한해서 둘의 공격력 차이가 K이하가 되도록 하는 경우의 수를 구해보자.&lt;/p&gt;
+
+&lt;p&gt;보자마자 &lt;a href=&quot;https://www.acmicpc.net/blog/view/12&quot;&gt;히스토그램에서 가장 큰 직사각형 찾기&lt;/a&gt;가 떠오르는 문제이다.
+이를 해결하는 방법에는 여러 가지가 있지만,
+여기선 구현은 조금 복잡하지만 아이디어가 간단한 방법인 바이너리 서치를 이용한 풀이를 살펴보자.&lt;/p&gt;
+
+&lt;p&gt;구간이 주어졌을 때, 찰스와 데릴라는 각각 가장 큰 공격력($C_i, D_i$)을 갖는 검을 고르게 된다.
+이 사실을 이용해서 각각의 검이 찰스(혹은 데릴라)에게 최대의 공격력을 주는 구간을 따로 고려하면 모든 답의 후보를 살펴볼 수 있다.&lt;/p&gt;
+
+&lt;p&gt;다음의 테스트 케이스를 살펴보자:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;5 4        # K = 4
+2 4 4 0 5  # C_i
+2 4 4 4 1  # D_i
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;여기서 각각의 검이 찰스에게 최대의 공격력을 주는 구간은 다음과 같다(각각의 수는 모두 인덱스를 나타낸다).&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;1 : {1..1..1} # [(1, 1)]
+2 : {1..2..4} # [(1, 2), (2, 2), (1, 3), (2, 3), (2, 4)]
+3 : {1..3..4} # [(1, 3), (2, 3), (3, 3), (3, 4)]
+4 : {4..4..4} # [(4, 4)]
+5 : {1..5..5} # [(1, 5), (2, 5), (3, 5), (4, 5), (5, 5)]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;왼쪽의 각 구간 별 중괄호 표현은 각 검이 구간 내의 최댓값인 가장 큰 구간을 나타낸다.
+이를 구할 때 바로 바이너리 서치를 이용하게 되는데,
+검 $i$에 대한 구간을 고려할 때, $[i, j]$ 구간의 최댓값이 $C_i$ 이하라면
+$j &amp;lt; k$인 $[i, k]$ 구간의 최댓값 역시 $C_i$ 이하가 되기 때문에
+바이너리 서치로 $i$를 중심으로 했을 때 (1)오른쪽 끝과 (2)왼쪽 끝을 따로 구할 수 있다.
+이 구간을 $L_, R_i$라고 하자.&lt;/p&gt;
+
+&lt;p&gt;이제 $C_i - K ≤ \mathrm{max}(\{D_j \| L’≤j≤R’\}) ≤ C_i + K$를 만족하는
+$L_i ≤ L’ ≤ i ≤ R’ ≤ R_i$ 쌍의 개수를 구하면 검 $i$가 속하는 모든 가능한 구간의 개수를 구할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;여기선 부등호의 양 변을 따로 계산하면 편리한데, 우선 $D_j ≤ C_i + K$를 만족하는 $j$의 최대 범위를 아까와 같은 방식으로 찾고,
+이를 $L^+, R^+$라고 하자. 그 다음 $D_j ≥ C_i - K$를 만족하는 최대 범위를 찾아 $L^-, R^-$라고 하면 (그런 구간이 존재할 경우)
+$L_i ≤ L^+ ≤ L^- ≤ i ≤ R^- ≤ R^+ ≤ R_i$가 되고, 이로부터 $L’ = \{L^+, …, L^-\}$, 그리고
+$R’ = \{R^-, …, R^+\}$를 찾아 $i$를 중심으로 하는 구간의 개수 $\|L’\| \cdot \|R’\|$를 얻을 수 있다.&lt;/p&gt;
+
+&lt;p&gt;여기까진 어렵지 않게 떠올릴 수 있지만, 실제로 구현할 때에는 특정 구간의 최댓값을 빠르게 구하는 구간 최댓값 쿼리&lt;sup id=&quot;fnref:2&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;를 이용해야 하고, 같은 공격력을 갖는 검이 여럿 있을 경우 중복되는 구간을 세지 않도록(위의 예제를 보자) 신경써서 구현해야 해서 실제로 대회 시간에 해결하기에는 어려운 문제라고 느꼈다.&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;span class=&quot;cp&quot;&gt;#include&amp;lt;cstdio&amp;gt;
 #include&amp;lt;map&amp;gt;
@@ -286,7 +329,10 @@ r_1 &amp; = &amp; (Q(42) - r_4 \cdot 2^{10} - r_5 \cdot 2^{8} - r_6 \cdot 2^{7})
 &lt;div class=&quot;footnotes&quot;&gt;
   &lt;ol&gt;
     &lt;li id=&quot;fn:1&quot;&gt;
-      &lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Sweep_line_algorithm&quot;&gt;스윕 라인&lt;/a&gt;에 대한 &lt;a href=&quot;https://www.topcoder.com/community/competitive-programming/tutorials/line-sweep-algorithms/&quot;&gt;탑코더 튜토리얼&lt;/a&gt;, &lt;a href=&quot;https://www.acmicpc.net/blog/view/25&quot;&gt;Baekjoon Online Judge 튜토리얼&lt;/a&gt; &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+      &lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Sweep_line_algorithm&quot;&gt;스윕 라인&lt;/a&gt;에 대한 &lt;a href=&quot;https://www.topcoder.com/community/competitive-programming/tutorials/line-sweep-algorithms/&quot;&gt;TopCoder 튜토리얼&lt;/a&gt;, &lt;a href=&quot;https://www.acmicpc.net/blog/view/25&quot;&gt;Baekjoon Online Judge 튜토리얼&lt;/a&gt;. &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:2&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Range_minimum_query&quot;&gt;구간 최댓값&lt;/a&gt; 문제를 해결하는 &lt;a href=&quot;https://www.acmicpc.net/blog/view/9&quot;&gt;Segment Tree&lt;/a&gt;, &lt;a href=&quot;https://cp-algorithms.com/data_structures/sparse-table.html&quot;&gt;Sparse Table&lt;/a&gt;. &lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
   &lt;/ol&gt;
 &lt;/div&gt;</content>
