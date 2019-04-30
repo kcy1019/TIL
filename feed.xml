@@ -5,7 +5,7 @@
   
   <link href="https://a.cyclic.dev/feed.xml" rel="self" type="application/atom+xml" />
   <link href="https://a.cyclic.dev/" rel="alternate" type="text/html" />
-  <updated>2019-04-30T12:15:47+00:00</updated>
+  <updated>2019-04-30T12:22:09+00:00</updated>
   <id>https://a.cyclic.dev//</id>
 
   
@@ -198,7 +198,7 @@ r_1 &amp; = &amp; (Q(42) - r_4 \cdot 2^{10} - r_5 \cdot 2^{8} - r_6 \cdot 2^{7})
 검 $i$에 대한 구간을 고려할 때, $[i, j]$ 구간의 최댓값이 $C_i$ 이하라면
 $j &amp;lt; k$인 $[i, k]$ 구간의 최댓값 역시 $C_i$ 이하가 되기 때문에
 바이너리 서치로 $i$를 중심으로 했을 때 (1)오른쪽 끝과 (2)왼쪽 끝을 따로 구할 수 있다.
-이 구간을 $L_, R_i$라고 하자.&lt;/p&gt;
+이 구간을 $L_i, R_i$라고 하자.&lt;/p&gt;
 
 &lt;p&gt;이제 $C_i - K ≤ \mathrm{max}(\{D_j \| L’≤j≤R’\}) ≤ C_i + K$를 만족하는
 $L_i ≤ L’ ≤ i ≤ R’ ≤ R_i$ 쌍의 개수를 구하면 검 $i$가 속하는 모든 가능한 구간의 개수를 구할 수 있다.&lt;/p&gt;
