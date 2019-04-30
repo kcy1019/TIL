@@ -5,7 +5,7 @@
   
   <link href="https://a.cyclic.dev/feed.xml" rel="self" type="application/atom+xml" />
   <link href="https://a.cyclic.dev/" rel="alternate" type="text/html" />
-  <updated>2019-04-30T12:22:09+00:00</updated>
+  <updated>2019-04-30T12:25:48+00:00</updated>
   <id>https://a.cyclic.dev//</id>
 
   
@@ -33,7 +33,7 @@
       <content type="html" xml:base="https://a.cyclic.dev/day42/">&lt;p&gt;&lt;a href=&quot;https://codingcompetitions.withgoogle.com/codejam/round/0000000000051706&quot;&gt;GCJ R1B&lt;/a&gt;는 새벽 1시에 열려서 잠을 포기하고 참가! 했지만..
 컨디션 조절 실패로 (변명) 이번에도 Round 2 진출에 실패하고 말았다.
 전체적인 난이도는 &lt;a href=&quot;https://codingcompetitions.withgoogle.com/codejam/round/0000000000051706/000000000012295c&quot;&gt;A&lt;/a&gt;가 너무 쉽고, &lt;a href=&quot;https://codingcompetitions.withgoogle.com/codejam/round/0000000000051706/0000000000122837&quot;&gt;B&lt;/a&gt;가 생각보다 어려웠으며,
-&lt;a href=&quot;https://codingcompetitions.withgoogle.com/codejam/round/0000000000051706/0000000000122838&quot;&gt;C&lt;/a&gt;는 구현이 은근히 복잡한 문제였다.&lt;/p&gt;
+&lt;a href=&quot;https://codingcompetitions.withgoogle.com/codejam/round/0000000000051706/0000000000122838&quot;&gt;C&lt;/a&gt;는 구현이 상당히 복잡한 문제였다.&lt;/p&gt;
 
 &lt;ol id=&quot;markdown-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#manhattan-crepe-cart&quot; id=&quot;markdown-toc-manhattan-crepe-cart&quot;&gt;Manhattan Crepe Cart&lt;/a&gt;&lt;/li&gt;
@@ -208,7 +208,7 @@ $L_i ≤ L’ ≤ i ≤ R’ ≤ R_i$ 쌍의 개수를 구하면 검 $i$가 속�
 $L_i ≤ L^+ ≤ L^- ≤ i ≤ R^- ≤ R^+ ≤ R_i$가 되고, 이로부터 $L’ = \{L^+, …, L^-\}$, 그리고
 $R’ = \{R^-, …, R^+\}$를 찾아 $i$를 중심으로 하는 구간의 개수 $\|L’\| \cdot \|R’\|$를 얻을 수 있다.&lt;/p&gt;
 
-&lt;p&gt;여기까진 어렵지 않게 떠올릴 수 있지만, 실제로 구현할 때에는 특정 구간의 최댓값을 빠르게 구하는 구간 최댓값 쿼리&lt;sup id=&quot;fnref:2&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;를 이용해야 하고, 같은 공격력을 갖는 검이 여럿 있을 경우 중복되는 구간을 세지 않도록(위의 예제를 보자) 신경써서 구현해야 해서 실제로 대회 시간에 해결하기에는 어려운 문제라고 느꼈다.&lt;/p&gt;
+&lt;p&gt;여기까진 어렵지 않게 떠올릴 수 있지만, 실제로 구현할 때에는 특정 구간의 최댓값을 빠르게 구하는 구간 최댓값 쿼리&lt;sup id=&quot;fnref:2&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;를 이용해야 하고, 같은 공격력을 갖는 검이 여럿 있을 경우 중복되는 구간을 세지 않도록(위의 예제를 보자) 신경써서 구현해야 해서 대회 시간에 해결하기에는 어려운 문제라고 느꼈다.&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;span class=&quot;cp&quot;&gt;#include&amp;lt;cstdio&amp;gt;
 #include&amp;lt;map&amp;gt;
@@ -352,7 +352,7 @@ $R’ = \{R^-, …, R^+\}$를 찾아 $i$를 중심으로 하는 구간의 개수
       
 
       
-        <summary type="html">GCJ R1B는 새벽 1시에 열려서 잠을 포기하고 참가! 했지만.. 컨디션 조절 실패로 (변명) 이번에도 Round 2 진출에 실패하고 말았다. 전체적인 난이도는 A가 너무 쉽고, B가 생각보다 어려웠으며, C는 구현이 은근히 복잡한 문제였다.</summary>
+        <summary type="html">GCJ R1B는 새벽 1시에 열려서 잠을 포기하고 참가! 했지만.. 컨디션 조절 실패로 (변명) 이번에도 Round 2 진출에 실패하고 말았다. 전체적인 난이도는 A가 너무 쉽고, B가 생각보다 어려웠으며, C는 구현이 상당히 복잡한 문제였다.</summary>
       
 
       

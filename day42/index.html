@@ -10,7 +10,7 @@
   
   
   <title>Google Code Jam 2019 Round 1B</title>
-  <meta name="description" content="GCJ R1B는 새벽 1시에 열려서 잠을 포기하고 참가! 했지만.. 컨디션 조절 실패로 (변명) 이번에도 Round 2 진출에 실패하고 말았다. 전체적인 난이도는 A가 너무 쉽고, B가 생각보다 어려웠으며, C는 구현이 은근히 복잡한 문제였다.">
+  <meta name="description" content="GCJ R1B는 새벽 1시에 열려서 잠을 포기하고 참가! 했지만.. 컨디션 조절 실패로 (변명) 이번에도 Round 2 진출에 실패하고 말았다. 전체적인 난이도는 A가 너무 쉽고, B가 생각보다 어려웠으며, C는 구현이 상당히 복잡한 문제였다.">
   
 
   <link rel="stylesheet" href="/assets/main.css">
@@ -25,7 +25,7 @@
   <meta name="twitter:card" content="summary">
   <meta name="twitter:site" content="kcy1019">
   <meta name="twitter:title" content="Google Code Jam 2019 Round 1B">
-  <meta name="twitter:description" content="GCJ R1B는 새벽 1시에 열려서 잠을 포기하고 참가! 했지만.. 컨디션 조절 실패로 (변명) 이번에도 Round 2 진출에 실패하고 말았다. 전체적인 난이도는 A가 너무 쉽고, B가 생각보다 어려웠으며, C는 구현이 은근히 복잡한 문제였다.">
+  <meta name="twitter:description" content="GCJ R1B는 새벽 1시에 열려서 잠을 포기하고 참가! 했지만.. 컨디션 조절 실패로 (변명) 이번에도 Round 2 진출에 실패하고 말았다. 전체적인 난이도는 A가 너무 쉽고, B가 생각보다 어려웠으며, C는 구현이 상당히 복잡한 문제였다.">
   
     <meta name="twitter:creator" content="kcy1019">
   
@@ -117,7 +117,7 @@
     <p><a href="https://codingcompetitions.withgoogle.com/codejam/round/0000000000051706">GCJ R1B</a>는 새벽 1시에 열려서 잠을 포기하고 참가! 했지만..
 컨디션 조절 실패로 (변명) 이번에도 Round 2 진출에 실패하고 말았다.
 전체적인 난이도는 <a href="https://codingcompetitions.withgoogle.com/codejam/round/0000000000051706/000000000012295c">A</a>가 너무 쉽고, <a href="https://codingcompetitions.withgoogle.com/codejam/round/0000000000051706/0000000000122837">B</a>가 생각보다 어려웠으며,
-<a href="https://codingcompetitions.withgoogle.com/codejam/round/0000000000051706/0000000000122838">C</a>는 구현이 은근히 복잡한 문제였다.</p>
+<a href="https://codingcompetitions.withgoogle.com/codejam/round/0000000000051706/0000000000122838">C</a>는 구현이 상당히 복잡한 문제였다.</p>
 
 <ol id="markdown-toc">
   <li><a href="#manhattan-crepe-cart" id="markdown-toc-manhattan-crepe-cart">Manhattan Crepe Cart</a></li>
@@ -292,7 +292,7 @@ $L_i ≤ L’ ≤ i ≤ R’ ≤ R_i$ 쌍의 개수를 구하면 검 $i$가 속�
 $L_i ≤ L^+ ≤ L^- ≤ i ≤ R^- ≤ R^+ ≤ R_i$가 되고, 이로부터 $L’ = \{L^+, …, L^-\}$, 그리고
 $R’ = \{R^-, …, R^+\}$를 찾아 $i$를 중심으로 하는 구간의 개수 $\|L’\| \cdot \|R’\|$를 얻을 수 있다.</p>
 
-<p>여기까진 어렵지 않게 떠올릴 수 있지만, 실제로 구현할 때에는 특정 구간의 최댓값을 빠르게 구하는 구간 최댓값 쿼리<sup id="fnref:2"><a href="#fn:2" class="footnote">2</a></sup>를 이용해야 하고, 같은 공격력을 갖는 검이 여럿 있을 경우 중복되는 구간을 세지 않도록(위의 예제를 보자) 신경써서 구현해야 해서 실제로 대회 시간에 해결하기에는 어려운 문제라고 느꼈다.</p>
+<p>여기까진 어렵지 않게 떠올릴 수 있지만, 실제로 구현할 때에는 특정 구간의 최댓값을 빠르게 구하는 구간 최댓값 쿼리<sup id="fnref:2"><a href="#fn:2" class="footnote">2</a></sup>를 이용해야 하고, 같은 공격력을 갖는 검이 여럿 있을 경우 중복되는 구간을 세지 않도록(위의 예제를 보자) 신경써서 구현해야 해서 대회 시간에 해결하기에는 어려운 문제라고 느꼈다.</p>
 
 <figure class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="cp">#include&lt;cstdio&gt;
 #include&lt;map&gt;
