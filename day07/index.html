@@ -266,7 +266,7 @@ $L_1$에서의 ‘원’은 마름모, 즉 네 변의 길이가 같은 사각형
     <span class="k">return</span> <span class="n">extreme</span><span class="p">;</span>
 <span class="p">}</span>
 
-<span class="kt">bool</span> <span class="n">cover</span><span class="p">(</span><span class="kt">int</span> <span class="n">r</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">ii</span><span class="o">&gt;</span> <span class="o">&amp;</span> <span class="n">pts</span><span class="p">)</span>
+<span class="kt">bool</span> <span class="nf">cover</span><span class="p">(</span><span class="kt">int</span> <span class="n">r</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">ii</span><span class="o">&gt;</span> <span class="o">&amp;</span> <span class="n">pts</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="kt">int</span> <span class="n">maxx</span> <span class="o">=</span> <span class="o">-</span><span class="mi">9999</span><span class="p">,</span> <span class="n">maxy</span> <span class="o">=</span> <span class="o">-</span><span class="mi">9999</span><span class="p">,</span>
         <span class="n">minx</span> <span class="o">=</span> <span class="o">+</span><span class="mi">9999</span><span class="p">,</span> <span class="n">miny</span> <span class="o">=</span> <span class="o">+</span><span class="mi">9999</span><span class="p">;</span>
@@ -291,7 +291,7 @@ $L_1$에서의 ‘원’은 마름모, 즉 네 변의 길이가 같은 사각형
     <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
 <span class="p">}</span>
 
-<span class="kt">int</span> <span class="n">solve</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">ii</span><span class="o">&gt;</span> <span class="o">&amp;</span> <span class="n">pts</span><span class="p">)</span>
+<span class="kt">int</span> <span class="nf">solve</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">ii</span><span class="o">&gt;</span> <span class="o">&amp;</span> <span class="n">pts</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="kt">int</span> <span class="n">le</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">ri</span> <span class="o">=</span> <span class="n">m</span> <span class="o">+</span> <span class="n">n</span><span class="p">,</span> <span class="n">ans</span> <span class="o">=</span> <span class="n">ri</span><span class="p">;</span>
     <span class="k">while</span> <span class="p">(</span><span class="n">le</span> <span class="o">&lt;=</span> <span class="n">ri</span><span class="p">)</span> <span class="p">{</span>
@@ -306,7 +306,7 @@ $L_1$에서의 ‘원’은 마름모, 즉 네 변의 길이가 같은 사각형
     <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
 <span class="p">}</span>
 
-<span class="kt">int</span> <span class="n">main</span><span class="p">()</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
 <span class="p">{</span>
     <span class="kt">int</span> <span class="n">T</span><span class="p">;</span>
     <span class="n">scanf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">T</span><span class="p">);</span>
