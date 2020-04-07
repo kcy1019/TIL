@@ -5,7 +5,7 @@
   
   <link href="https://a.cyclic.dev/feed.xml" rel="self" type="application/atom+xml" />
   <link href="https://a.cyclic.dev/" rel="alternate" type="text/html" />
-  <updated>2020-04-07T00:43:35+00:00</updated>
+  <updated>2020-04-07T00:56:02+00:00</updated>
   <id>https://a.cyclic.dev//</id>
 
   
@@ -144,8 +144,8 @@ K = (N-1)x + y (1 ≤ x, y ≤ N, x ≠ y) 라고 하자.&lt;/li&gt;
 여기서 직관적으로 라틴 스퀘어를 위에서부터 한 줄씩 만들어도 괜찮을 것이란 생각이 떠오른다&lt;sup id=&quot;fnref:3&quot;&gt;&lt;a href=&quot;#fn:3&quot; class=&quot;footnote&quot;&gt;3&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
 
 &lt;p&gt;라틴 스퀘어의 각 행을 채우는 방법은 여러 가지가 있겠지만,
-구현은 조금 길어도 아이디어가 간단한 &lt;a href=&quot;https://blog.naver.com/kks227/220807541506&quot;&gt;이분 매칭&lt;/a&gt;을 이용했다.
-각 열에 대해 해당하는 열에 들어갈 수 있는 수 모두와 간선을 이어주고 이분 매칭을 수행하면 끝!&lt;/p&gt;
+대회중에는 구현은 조금 길지만 아이디어가 간단한 &lt;a href=&quot;https://blog.naver.com/kks227/220807541506&quot;&gt;이분 매칭&lt;/a&gt;을 이용했다.
+각 열에 대해 해당하는 칸에 들어갈 수 있는 수 모두와 간선을 이어주고 이분 매칭을 수행하면 끝!&lt;/p&gt;
 
 &lt;p&gt;예를 들어 5 x 5 에서 trace = 7 인 경우를 살펴보자.&lt;/p&gt;
 &lt;div class=&quot;highlighter-rouge&quot; style=&quot;vertical-align:top;max-width:320px;display:inline-block;max-height:250px&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;
@@ -216,9 +216,9 @@ diagonal: 1,1,1,2,2    2,2,1,1,1
                   2    5 4 2 3 1
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;사실 대각선을 미리 채워둔 상태에서는 단순히 위에서부터 한 행씩 채우는 방법으로는 채우지 못하는 경우가 존재한다.
+&lt;p&gt;사실 대각선을 미리 채워둔 상태에서는 단순히 위에서부터 한 행씩 그리디하게 채우는 방법으로는 채우지 못하는 경우가 존재한다.
 하지만 이런 경우에도 대각선 위 원소들의 순서만 바꾸면 해결할 수 있고,
-대부분의 순서에 대해서는 문제 없이 채울 수 있으므로 대각선을 채우는 부분은 완전 탐색으로 구현해도 된다.&lt;/p&gt;
+대부분의 순서에 대해서는 이 방법을 통해 문제 없이 채울 수 있으므로 대각선을 채우는 부분은 완전 탐색으로 구현했다.&lt;/p&gt;
 
 &lt;div style=&quot;margin-bottom:1%&quot;&gt;
 &lt;input type=&quot;checkbox&quot; id=&quot;collapse-code&quot; /&gt;
