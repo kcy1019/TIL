@@ -5,7 +5,7 @@
   
   <link href="https://a.cyclic.dev/feed.xml" rel="self" type="application/atom+xml" />
   <link href="https://a.cyclic.dev/" rel="alternate" type="text/html" />
-  <updated>2020-04-06T18:01:58+00:00</updated>
+  <updated>2020-04-07T00:43:35+00:00</updated>
   <id>https://a.cyclic.dev//</id>
 
   
@@ -128,7 +128,7 @@ N^2-2 = N, ..., N, N,   N-2  # x = N, y = N-2
   &lt;li&gt;N+1 &amp;lt; K &amp;lt; N&lt;sup&gt;2&lt;/sup&gt;-1 인 K에 대해서
 K = (N-1)x + y (1 ≤ x, y ≤ N, x ≠ y) 라고 하자.&lt;/li&gt;
   &lt;li&gt;조건으로부터 항상 y &amp;lt; N-1 이거나 x &amp;lt; N 임을 알 수 있고,&lt;/li&gt;
-  &lt;li&gt;K = (N-2)x + (x-1) (y+1) 혹은 K = (N-2)x + (x+1) + (y-1) 으로 다시 쓸 수 있다.&lt;/li&gt;
+  &lt;li&gt;K = (N-3)x + (x-1) + (x-1) + (y+2) 혹은 K = (N-2)x + (x+1) + (y-1) 으로 다시 쓸 수 있다.&lt;/li&gt;
   &lt;li&gt;따라서 같은 수가 N-1번 등장하는 표현을 N-2번 등장하는 표현으로 바꿀 수 있다.&lt;/li&gt;
 &lt;/ol&gt;
 
