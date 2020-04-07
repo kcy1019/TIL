@@ -5,7 +5,7 @@
   
   <link href="https://a.cyclic.dev/feed.xml" rel="self" type="application/atom+xml" />
   <link href="https://a.cyclic.dev/" rel="alternate" type="text/html" />
-  <updated>2020-04-07T01:01:28+00:00</updated>
+  <updated>2020-04-07T01:05:20+00:00</updated>
   <id>https://a.cyclic.dev//</id>
 
   
@@ -82,7 +82,7 @@
 &lt;h2 id=&quot;관찰&quot;&gt;관찰&lt;/h2&gt;
 
 &lt;p&gt;문제를 보고 자연스레 떠오르는 접근은 &lt;em&gt;“대각선을 먼저 채운 다음 나머지 칸을 채워보자”&lt;/em&gt; 이다.
-다만 일부가 채워져 있는 라틴 스퀘어를 완성하는 것은 NP-Complete&lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;에 속한다는 문제가 있다.
+다만 일부가 채워져 있는 라틴 스퀘어를 완성하는 것은 일반적으로 NP-Complete&lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;에 속한다는 문제가 있다.
 해법이 보이지 않으니 우선 Test Set 1 (2 ≤ n ≤ 5)을 해결하는 완전 탐색 코드를 작성하고 출력을 살펴보자.&lt;/p&gt;
 
 &lt;h3 id=&quot;n1-n2-1&quot;&gt;N+1, N&lt;sup&gt;2&lt;/sup&gt;-1&lt;/h3&gt;
