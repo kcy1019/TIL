@@ -133,7 +133,7 @@ Output: 1-&gt;3-&gt;5-&gt;2-&gt;4-&gt;null
  *     ListNode(int x) : val(x), next(nullptr) {}
  * };
  */</span>
-<span class="k">struct</span> <span class="n">Solution</span> <span class="p">{</span>
+<span class="k">struct</span> <span class="nc">Solution</span> <span class="p">{</span>
     <span class="n">ListNode</span><span class="o">*</span> <span class="n">oddEvenList</span><span class="p">(</span><span class="n">ListNode</span> <span class="o">*</span> <span class="n">head</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">head</span> <span class="o">==</span> <span class="nb">nullptr</span><span class="p">)</span> <span class="k">return</span> <span class="nb">nullptr</span><span class="p">;</span> <span class="c1">// 빈 리스트가 들어올 수 있다.</span>
         <span class="k">auto</span> <span class="o">*</span> <span class="n">odd</span>  <span class="o">=</span> <span class="n">head</span><span class="p">;</span>

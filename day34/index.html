@@ -384,7 +384,7 @@ PS를 다시 연습하기에 훌륭한 대회였다.</p>
 </span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
 <span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="mf">1e5</span> <span class="o">+</span> <span class="mi">10</span><span class="p">;</span>
 
-<span class="k">struct</span> <span class="n">PrefixSumNode</span> <span class="p">{</span>
+<span class="k">struct</span> <span class="nc">PrefixSumNode</span> <span class="p">{</span>
     <span class="k">typedef</span> <span class="kt">int</span> <span class="n">ReturnType</span><span class="p">;</span>
     <span class="n">ReturnType</span> <span class="n">sum</span><span class="p">,</span> <span class="n">prefix</span><span class="p">;</span>
     <span class="kr">inline</span> <span class="n">PrefixSumNode</span><span class="p">(</span><span class="n">ReturnType</span> <span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">:</span> <span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">prefix</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="p">{}</span>
@@ -397,8 +397,8 @@ PS를 다시 연습하기에 훌륭한 대회였다.</p>
     <span class="p">}</span>
 <span class="p">};</span>
 
-<span class="k">template</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">Node</span><span class="o">&gt;</span>
-<span class="k">struct</span> <span class="n">SegmentTree</span> <span class="p">{</span>
+<span class="k">template</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">Node</span><span class="p">&gt;</span>
+<span class="k">struct</span> <span class="nc">SegmentTree</span> <span class="p">{</span>
     <span class="k">typedef</span> <span class="k">typename</span> <span class="n">Node</span><span class="o">::</span><span class="n">ReturnType</span> <span class="n">T</span><span class="p">;</span>
     <span class="n">Node</span> <span class="o">*</span><span class="n">nodes</span><span class="p">;</span>
     <span class="kt">int</span> <span class="n">size</span><span class="p">;</span>
