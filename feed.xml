@@ -5,7 +5,7 @@
   
   <link href="https://a.cyclic.dev/feed.xml" rel="self" type="application/atom+xml" />
   <link href="https://a.cyclic.dev/" rel="alternate" type="text/html" />
-  <updated>2022-02-03T21:09:48+00:00</updated>
+  <updated>2022-02-04T21:10:16+00:00</updated>
   <id>https://a.cyclic.dev//</id>
 
   
@@ -740,10 +740,10 @@ i번째 순열의 j번째 알파벳을 물어볼 경우 i * 5 + j를 물어보�
 여기에는 총 23번의 쿼리가 필요하다.
 이런 식으로 마지막 글자까지 반복하면 총 119 + 23 + 5 + 1 = 148번의 쿼리를 통해 답을 찾을 수 있다.&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;span class=&quot;cp&quot;&gt;#include&amp;lt;cstdio&amp;gt;
-#include&amp;lt;set&amp;gt;
-#include&amp;lt;vector&amp;gt;
-#include&amp;lt;numeric&amp;gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;span class=&quot;cp&quot;&gt;#include&lt;/span&gt;&lt;span class=&quot;cpf&quot;&gt;&amp;lt;cstdio&amp;gt;&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;
+#include&lt;/span&gt;&lt;span class=&quot;cpf&quot;&gt;&amp;lt;set&amp;gt;&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;
+#include&lt;/span&gt;&lt;span class=&quot;cpf&quot;&gt;&amp;lt;vector&amp;gt;&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;
+#include&lt;/span&gt;&lt;span class=&quot;cpf&quot;&gt;&amp;lt;numeric&amp;gt;&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;
 #define sz size()
 #define pb emplace_back
 #define ALL(X) (X).begin(),(X).end()
@@ -805,11 +805,11 @@ i번째 순열의 j번째 알파벳을 물어볼 경우 i * 5 + j를 물어보�
 그렇게 각 상태의 그런디 수를 구했을 때 0이 나온다면 해당하는 상태로부터 승리하는 방법이 없다는 것이고,
 이를 이용해서 모든 첫 수에 대해 그런디 수가 0이 되는 경우 - 즉 상대가 패배하는 경우의 수를 세면 답을 구할 수 있다.&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;span class=&quot;cp&quot;&gt;#include&amp;lt;cstdio&amp;gt;
-#include&amp;lt;cstring&amp;gt;
-#include&amp;lt;cstdint&amp;gt;
-#include&amp;lt;vector&amp;gt;
-#include&amp;lt;algorithm&amp;gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;span class=&quot;cp&quot;&gt;#include&lt;/span&gt;&lt;span class=&quot;cpf&quot;&gt;&amp;lt;cstdio&amp;gt;&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;
+#include&lt;/span&gt;&lt;span class=&quot;cpf&quot;&gt;&amp;lt;cstring&amp;gt;&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;
+#include&lt;/span&gt;&lt;span class=&quot;cpf&quot;&gt;&amp;lt;cstdint&amp;gt;&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;
+#include&lt;/span&gt;&lt;span class=&quot;cpf&quot;&gt;&amp;lt;vector&amp;gt;&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;
+#include&lt;/span&gt;&lt;span class=&quot;cpf&quot;&gt;&amp;lt;algorithm&amp;gt;&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;
 #define ALL(X) (X).begin(),(X).end()
 &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;namespace&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 
@@ -898,10 +898,10 @@ $2^{4\cdot 4}$개의 상태만 고려하면 되기 때문에 모든 경우를 �
 여기서도 매번 재귀 호출을 할 때마다 부호를 뒤집는데,
 이는 상대가 패배하는 것(다음 함수 호출)이 내(현재 함수 호출)가 승리하는 것이기 때문이다.&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;span class=&quot;cp&quot;&gt;#include&amp;lt;cstdio&amp;gt;
-#include&amp;lt;cstring&amp;gt;
-#include&amp;lt;cstdint&amp;gt;
-#include&amp;lt;map&amp;gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;span class=&quot;cp&quot;&gt;#include&lt;/span&gt;&lt;span class=&quot;cpf&quot;&gt;&amp;lt;cstdio&amp;gt;&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;
+#include&lt;/span&gt;&lt;span class=&quot;cpf&quot;&gt;&amp;lt;cstring&amp;gt;&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;
+#include&lt;/span&gt;&lt;span class=&quot;cpf&quot;&gt;&amp;lt;cstdint&amp;gt;&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;
+#include&lt;/span&gt;&lt;span class=&quot;cpf&quot;&gt;&amp;lt;map&amp;gt;&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;
 &lt;/span&gt;
 &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int8_t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
@@ -1091,9 +1091,9 @@ $2^{4\cdot 4}$개의 상태만 고려하면 되기 때문에 모든 경우를 �
 같은 방법을 이용해서 남쪽을 바라보는 사람 역시 $(y_0, -1)$으로 나타낼 수 있다.
 이제 각 이벤트를 처리하면서 가장 많은 사람의 진행 방향과 겹치는 점을 선택하면 끝!&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;span class=&quot;cp&quot;&gt;#include&amp;lt;cstdio&amp;gt;
-#include&amp;lt;algorithm&amp;gt;
-#include&amp;lt;vector&amp;gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;span class=&quot;cp&quot;&gt;#include&lt;/span&gt;&lt;span class=&quot;cpf&quot;&gt;&amp;lt;cstdio&amp;gt;&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;
+#include&lt;/span&gt;&lt;span class=&quot;cpf&quot;&gt;&amp;lt;algorithm&amp;gt;&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;
+#include&lt;/span&gt;&lt;span class=&quot;cpf&quot;&gt;&amp;lt;vector&amp;gt;&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;
 #define x first
 #define y second
 #define pb emplace_back
@@ -1245,9 +1245,9 @@ $R’ = \{R^-, …, R^+\}$를 찾아 $i$를 중심으로 하는 구간의 개수
 
 &lt;p&gt;여기까진 어렵지 않게 떠올릴 수 있지만, 실제로 구현할 때에는 특정 구간의 최댓값을 빠르게 구하는 구간 최댓값 쿼리&lt;sup id=&quot;fnref:2&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;를 이용해야 하고, 같은 공격력을 갖는 검이 여럿 있을 경우 중복되는 구간을 세지 않도록(위의 예제를 보자) 신경써서 구현해야 해서 대회 시간에 해결하기에는 어려운 문제라고 느꼈다.&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;span class=&quot;cp&quot;&gt;#include&amp;lt;cstdio&amp;gt;
-#include&amp;lt;map&amp;gt;
-#include&amp;lt;algorithm&amp;gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;span class=&quot;cp&quot;&gt;#include&lt;/span&gt;&lt;span class=&quot;cpf&quot;&gt;&amp;lt;cstdio&amp;gt;&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;
+#include&lt;/span&gt;&lt;span class=&quot;cpf&quot;&gt;&amp;lt;map&amp;gt;&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;
+#include&lt;/span&gt;&lt;span class=&quot;cpf&quot;&gt;&amp;lt;algorithm&amp;gt;&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;
 &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;namespace&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ll&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;long&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 
@@ -1431,8 +1431,8 @@ PS를 다시 연습하기에 훌륭한 대회였다.&lt;/p&gt;
 홀수 개 존재하는 알파벳이 1개인 경우에는 해당 알파벳을 가운데에 놓음으로써 팰린드롬을 만들 수 있지만,
 이러한 알파벳이 여럿 존재하면 팰린드롬을 만들 수 없으므로 간단히 해결 가능하다.&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;span class=&quot;cp&quot;&gt;#include&amp;lt;cstdio&amp;gt;
-#include&amp;lt;cstring&amp;gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;span class=&quot;cp&quot;&gt;#include&lt;/span&gt;&lt;span class=&quot;cpf&quot;&gt;&amp;lt;cstdio&amp;gt;&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;
+#include&lt;/span&gt;&lt;span class=&quot;cpf&quot;&gt;&amp;lt;cstring&amp;gt;&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;
 &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MAXN&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;1e5&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 
 &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;MAXN&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]{};&lt;/span&gt;
@@ -1486,11 +1486,11 @@ PS를 다시 연습하기에 훌륭한 대회였다.&lt;/p&gt;
 &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;S&lt;/code&gt;가 다를 수 있으므로 아까보다 복잡해진 기분이 든다.
 하지만, 결국 단위 시간당 줄어드는 에너지의 양, 즉 &lt;code class=&quot;highlighter-rouge&quot;&gt;L' = L / S&lt;/code&gt;를 생각해 보면 아까와 별로 다를 것이 없음을 알 수 있다.&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;span class=&quot;cp&quot;&gt;#include&amp;lt;cstdio&amp;gt;
-#include&amp;lt;cstring&amp;gt;
-#include&amp;lt;tuple&amp;gt;
-#include&amp;lt;vector&amp;gt;
-#include&amp;lt;algorithm&amp;gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;span class=&quot;cp&quot;&gt;#include&lt;/span&gt;&lt;span class=&quot;cpf&quot;&gt;&amp;lt;cstdio&amp;gt;&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;
+#include&lt;/span&gt;&lt;span class=&quot;cpf&quot;&gt;&amp;lt;cstring&amp;gt;&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;
+#include&lt;/span&gt;&lt;span class=&quot;cpf&quot;&gt;&amp;lt;tuple&amp;gt;&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;
+#include&lt;/span&gt;&lt;span class=&quot;cpf&quot;&gt;&amp;lt;vector&amp;gt;&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;
+#include&lt;/span&gt;&lt;span class=&quot;cpf&quot;&gt;&amp;lt;algorithm&amp;gt;&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;
 #define pb emplace_back
 #define ALL(X) (X).begin(),(X).end()
 &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;namespace&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
@@ -1611,11 +1611,11 @@ PS를 다시 연습하기에 훌륭한 대회였다.&lt;/p&gt;
 
 &lt;p&gt;이를 바탕으로 다시 코드를 작성해 보면 다음과 같다.&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;span class=&quot;cp&quot;&gt;#include&amp;lt;cstdio&amp;gt;
-#include&amp;lt;map&amp;gt;
-#include&amp;lt;deque&amp;gt;
-#include&amp;lt;vector&amp;gt;
-#include&amp;lt;algorithm&amp;gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;span class=&quot;cp&quot;&gt;#include&lt;/span&gt;&lt;span class=&quot;cpf&quot;&gt;&amp;lt;cstdio&amp;gt;&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;
+#include&lt;/span&gt;&lt;span class=&quot;cpf&quot;&gt;&amp;lt;map&amp;gt;&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;
+#include&lt;/span&gt;&lt;span class=&quot;cpf&quot;&gt;&amp;lt;deque&amp;gt;&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;
+#include&lt;/span&gt;&lt;span class=&quot;cpf&quot;&gt;&amp;lt;vector&amp;gt;&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;
+#include&lt;/span&gt;&lt;span class=&quot;cpf&quot;&gt;&amp;lt;algorithm&amp;gt;&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;
 #define sz size()
 #define pb emplace_back
 &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;namespace&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
@@ -1665,11 +1665,11 @@ PS를 다시 연습하기에 훌륭한 대회였다.&lt;/p&gt;
 더욱이, 시작점이 바뀔 때 마다 업데이트 하는 연산 역시도 로그 시간에 수행할 수 있다.
 따라서 모든 시작점에 대해 최적 부분 배열을 로그 시간에 구할 수 있으므로 총 시간 복잡도는 $O(n\log{n})$이 된다.&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;span class=&quot;cp&quot;&gt;#include&amp;lt;cstdio&amp;gt;
-#include&amp;lt;map&amp;gt;
-#include&amp;lt;deque&amp;gt;
-#include&amp;lt;vector&amp;gt;
-#include&amp;lt;algorithm&amp;gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;span class=&quot;cp&quot;&gt;#include&lt;/span&gt;&lt;span class=&quot;cpf&quot;&gt;&amp;lt;cstdio&amp;gt;&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;
+#include&lt;/span&gt;&lt;span class=&quot;cpf&quot;&gt;&amp;lt;map&amp;gt;&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;
+#include&lt;/span&gt;&lt;span class=&quot;cpf&quot;&gt;&amp;lt;deque&amp;gt;&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;
+#include&lt;/span&gt;&lt;span class=&quot;cpf&quot;&gt;&amp;lt;vector&amp;gt;&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;
+#include&lt;/span&gt;&lt;span class=&quot;cpf&quot;&gt;&amp;lt;algorithm&amp;gt;&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;
 #define sz size()
 #define pb emplace_back
 &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;namespace&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
@@ -1945,13 +1945,13 @@ ISRG의 Intermediate Certificate은 아까의 테스트 사이트에 접속해�
     &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;lambda&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strip&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()),&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strip&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
     &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Case #{}: {}&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;C&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;solve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;span class=&quot;cp&quot;&gt;#include&amp;lt;ctime&amp;gt;
-#include&amp;lt;cstdio&amp;gt;
-#include&amp;lt;cstdlib&amp;gt;
-#include&amp;lt;cstring&amp;gt;
-#include&amp;lt;tuple&amp;gt;
-#include&amp;lt;vector&amp;gt;
-#include&amp;lt;algorithm&amp;gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;span class=&quot;cp&quot;&gt;#include&lt;/span&gt;&lt;span class=&quot;cpf&quot;&gt;&amp;lt;ctime&amp;gt;&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;
+#include&lt;/span&gt;&lt;span class=&quot;cpf&quot;&gt;&amp;lt;cstdio&amp;gt;&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;
+#include&lt;/span&gt;&lt;span class=&quot;cpf&quot;&gt;&amp;lt;cstdlib&amp;gt;&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;
+#include&lt;/span&gt;&lt;span class=&quot;cpf&quot;&gt;&amp;lt;cstring&amp;gt;&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;
+#include&lt;/span&gt;&lt;span class=&quot;cpf&quot;&gt;&amp;lt;tuple&amp;gt;&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;
+#include&lt;/span&gt;&lt;span class=&quot;cpf&quot;&gt;&amp;lt;vector&amp;gt;&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;
+#include&lt;/span&gt;&lt;span class=&quot;cpf&quot;&gt;&amp;lt;algorithm&amp;gt;&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;
 #define x first
 #define y second
 #define pb emplace_back
@@ -2178,8 +2178,8 @@ A, B는 쉬운데 C는 특히 Large가 어려워서 고생했다.&lt;/p&gt;
 &lt;p&gt;이렇게 자를 부분을 따로 구하고 나면 실제 조각들이 몇 개의 초코칩을 갖게 되는지 알 수 있으므로
 마지막 체크만 하면 쉽게 해결할 수 있다.&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;span class=&quot;cp&quot;&gt;#include&amp;lt;cstdio&amp;gt;
-#include&amp;lt;vector&amp;gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;span class=&quot;cp&quot;&gt;#include&lt;/span&gt;&lt;span class=&quot;cpf&quot;&gt;&amp;lt;cstdio&amp;gt;&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;
+#include&lt;/span&gt;&lt;span class=&quot;cpf&quot;&gt;&amp;lt;vector&amp;gt;&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;
 &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;namespace&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ll&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;long&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MAXN&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;111&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
@@ -2274,10 +2274,10 @@ $N (N ≤ M_i)$개의 비트를 계산하는 데에 $S_i \cdot N + P_i$ 만큼�
 여기서 가장 많은 수의 비트를 계산할 수 있는 $R$개의 계산대의 비트 수를 더한 것이 바로
 시간 제한 T 안에 계산할 수 있는 비트 개수의 최댓값이다.&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;span class=&quot;cp&quot;&gt;#include&amp;lt;cstdio&amp;gt;
-#include&amp;lt;vector&amp;gt;
-#include&amp;lt;numeric&amp;gt;
-#include&amp;lt;algorithm&amp;gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;span class=&quot;cp&quot;&gt;#include&lt;/span&gt;&lt;span class=&quot;cpf&quot;&gt;&amp;lt;cstdio&amp;gt;&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;
+#include&lt;/span&gt;&lt;span class=&quot;cpf&quot;&gt;&amp;lt;vector&amp;gt;&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;
+#include&lt;/span&gt;&lt;span class=&quot;cpf&quot;&gt;&amp;lt;numeric&amp;gt;&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;
+#include&lt;/span&gt;&lt;span class=&quot;cpf&quot;&gt;&amp;lt;algorithm&amp;gt;&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;
 #define RALL(X) (X).rbegin(),(X).rend()
 &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;namespace&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ll&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;long&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
@@ -2892,10 +2892,10 @@ $L_1$에서의 ‘원’은 마름모, 즉 네 변의 길이가 같은 사각형
 이제 여기서 ‘아직 안 덮어진’ 점을 모두 덮는 정사각형의 크기를 찾아서,
 이를 다시 반지름과 비교하면 간단하게 완성♪&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;span class=&quot;cp&quot;&gt;#include&amp;lt;queue&amp;gt;
-#include&amp;lt;cstdio&amp;gt;
-#include&amp;lt;cstring&amp;gt;
-#include&amp;lt;algorithm&amp;gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;span class=&quot;cp&quot;&gt;#include&lt;/span&gt;&lt;span class=&quot;cpf&quot;&gt;&amp;lt;queue&amp;gt;&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;
+#include&lt;/span&gt;&lt;span class=&quot;cpf&quot;&gt;&amp;lt;cstdio&amp;gt;&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;
+#include&lt;/span&gt;&lt;span class=&quot;cpf&quot;&gt;&amp;lt;cstring&amp;gt;&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;
+#include&lt;/span&gt;&lt;span class=&quot;cpf&quot;&gt;&amp;lt;algorithm&amp;gt;&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;
 #define x first
 #define y second
 #define pb emplace_back
@@ -3583,9 +3583,9 @@ $~\mathrm{left}~, ~\mathrm{right}~$: 이미 방문한 구간의 끝 점, $~\math
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;span class=&quot;cp&quot;&gt;#include&amp;lt;cstdio&amp;gt;
-#include&amp;lt;cstring&amp;gt;
-#include&amp;lt;algorithm&amp;gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;span class=&quot;cp&quot;&gt;#include&lt;/span&gt;&lt;span class=&quot;cpf&quot;&gt;&amp;lt;cstdio&amp;gt;&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;
+#include&lt;/span&gt;&lt;span class=&quot;cpf&quot;&gt;&amp;lt;cstring&amp;gt;&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;
+#include&lt;/span&gt;&lt;span class=&quot;cpf&quot;&gt;&amp;lt;algorithm&amp;gt;&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;
 &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;namespace&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ll&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;long&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 
